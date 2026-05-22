@@ -458,26 +458,6 @@
     .trust-text-title { font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: #fff; }
     .trust-text-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
-    /* ── CERT STRIP ────────────────────────────────────────────── */
-    #cert-strip {
-      background: var(--off-white); border-bottom: 1px solid var(--border);
-      padding: 20px 0;
-    }
-    .cert-strip-inner {
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; flex-wrap: wrap;
-    }
-    .cert-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 100px; padding: 8px 18px;
-      font-family: var(--font-head); font-size: 0.8rem; font-weight: 600;
-      color: var(--text-mid); box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s, border-color 0.2s;
-    }
-    .cert-badge:hover { box-shadow: var(--shadow-md); border-color: rgba(3,105,161,0.3); }
-    .cert-badge svg { color: var(--blue); flex-shrink: 0; }
-    .cert-sep { width: 1px; height: 24px; background: var(--border); }
 
     /* ── SERVICES ──────────────────────────────────────────────── */
     #services { padding: 76px 0; background: var(--white); }
@@ -861,9 +841,48 @@
     .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.3); transition: color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.6); }
 
+    /* ── CHAT WIDGET ───────────────────────────────────────────── */
+    #chat-widget {
+      position: fixed; bottom: 24px; right: 24px; z-index: 400;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+    }
+    #chat-panel {
+      width: 380px; height: 560px;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden; border: 1px solid var(--border);
+      transform-origin: bottom right;
+      transition: transform 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.28s ease;
+    }
+    #chat-panel.hidden {
+      transform: scale(0.85) translateY(16px); opacity: 0; pointer-events: none;
+    }
+    #chat-panel iframe {
+      width: 100%; height: 100%; border: none; display: block;
+    }
+    #chat-toggle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--blue); color: #fff; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-blue), 0 4px 16px rgba(0,0,0,0.2);
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    #chat-toggle:hover { background: var(--blue-dark); transform: scale(1.06); }
+    #chat-toggle .icon-chat, #chat-toggle .icon-close { position: absolute; transition: opacity 0.2s, transform 0.2s; }
+    #chat-toggle .icon-close { opacity: 0; transform: rotate(-90deg) scale(0.7); }
+    #chat-toggle.open .icon-chat { opacity: 0; transform: rotate(90deg) scale(0.7); }
+    #chat-toggle.open .icon-close { opacity: 1; transform: rotate(0deg) scale(1); }
+    #chat-toggle { position: relative; }
+    @media (max-width: 480px) {
+      #chat-panel { width: calc(100vw - 32px); height: 70dvh; right: 16px; bottom: 80px; position: fixed; border-radius: 14px; }
+      #chat-panel.hidden { display: none; }
+      #chat-widget { bottom: 16px; right: 16px; }
+    }
+
     /* ── FLOAT BUTTON ──────────────────────────────────────────── */
     #float-call {
-      position: fixed; bottom: 28px; right: 24px; z-index: 300;
+      position: fixed; bottom: 28px; left: 24px; z-index: 300;
       display: none;
     }
     .float-btn {
@@ -1090,42 +1109,6 @@
   </div>
 </section>
 
-<!-- ═══ CERT STRIP ═══════════════════════════════════════════ -->
-<div id="cert-strip" aria-label="Tanúsítványok és jogosultságok">
-  <div class="container">
-    <div class="cert-strip-inner">
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Gázbiztonsági felülvizsgáló
-      </div>
-      <div class="cert-sep" aria-hidden="true"></div>
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Ariston szakszerviz
-      </div>
-      <div class="cert-sep" aria-hidden="true"></div>
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Bosch szakszerviz
-      </div>
-      <div class="cert-sep" aria-hidden="true"></div>
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Baxi szakszerviz
-      </div>
-      <div class="cert-sep" aria-hidden="true"></div>
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Immergas szakszerviz
-      </div>
-      <div class="cert-sep" aria-hidden="true"></div>
-      <div class="cert-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
-        Számla és garancia
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══ SERVICES ════════════════════════════════════════════ -->
 <section id="services" aria-labelledby="services-headline">
@@ -1614,6 +1597,17 @@
   </a>
 </div>
 
+<!-- ═══ CHAT WIDGET ══════════════════════════════════════════ -->
+<div id="chat-widget">
+  <div id="chat-panel" class="hidden" role="dialog" aria-label="Chat asszisztens">
+    <iframe src="https://magyar-demo.vercel.app/kazanszerviz.html" title="Chat asszisztens" allow="microphone" loading="lazy"></iframe>
+  </div>
+  <button id="chat-toggle" aria-label="Chat megnyitása" aria-expanded="false" onclick="toggleChat()">
+    <svg class="icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
 <!-- ═══ SCRIPTS ══════════════════════════════════════════════ -->
 <script>
   /* Nav scroll */
@@ -1623,6 +1617,16 @@
   }, { passive: true });
 
   /* Mobile nav */
+  /* Chat widget */
+  function toggleChat() {
+    const panel = document.getElementById('chat-panel');
+    const btn = document.getElementById('chat-toggle');
+    const isOpen = !panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  }
+
   function toggleNav(btn) {
     const mn = document.getElementById('mobile-nav');
     const open = mn.style.display === 'flex';
