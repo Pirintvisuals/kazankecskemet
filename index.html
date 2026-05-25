@@ -251,10 +251,13 @@
       height: var(--nav-h);
       display: flex; align-items: center;
       background: var(--navy);
-      transition: box-shadow 0.3s ease;
+      transition: transform 0.38s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
     }
     #nav.scrolled {
       box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
+    #nav.nav-hidden {
+      transform: translateY(-100%);
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between; width: 100%;
@@ -427,7 +430,7 @@
     .hero-right {
       position: absolute; top: 0; right: 0;
       width: 58%; height: 100%;
-      background-image: url('https://images.unsplash.com/photo-1662556153586-223039dc8152?auto=format&fit=crop&w=1920&q=85');
+      background-image: url('https://images.unsplash.com/photo-1621905251189-08b45249ff49?auto=format&fit=crop&w=1920&q=90');
       background-size: cover; background-position: center;
       clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
       animation: heroClipReveal 1.2s 0.1s cubic-bezier(0.0, 0.55, 0.45, 1.0) forwards;
@@ -565,7 +568,7 @@
       position: relative;
     }
     .about-photo-frame img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
       transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
     }
     .about-photo-wrap:hover .about-photo-frame img { transform: scale(1.03); }
@@ -658,7 +661,7 @@
     .t-stars { display: flex; gap: 3px; margin-left: auto; }
 
     /* ── FAQ ──────────────────────────────────────────────────── */
-    #faq { padding: 76px 0; background: var(--white); }
+    #faq { padding: 76px 0; background: var(--off-white); }
     .faq-header { text-align: center; max-width: 520px; margin: 0 auto 40px; }
     .faq-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
@@ -728,7 +731,7 @@
     }
     .cta-bg-img {
       position: absolute; inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1650551182991-b07558247564?auto=format&fit=crop&w=1920&q=70');
+      background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1920&q=70');
       background-size: cover; background-position: center;
       opacity: 0.12;
     }
@@ -1118,6 +1121,11 @@
     <!-- Main content -->
     <main class="hero-main">
 
+      <div class="hero-avail" aria-label="Elérhető most">
+        <span class="hero-avail-dot" aria-hidden="true"></span>
+        Elérhető most
+      </div>
+
       <h1 class="hero-h1" id="hero-headline">
         Nem fűt a kazán?<br/>
         <span class="hl-blue">Gyors segítség</span><br/>
@@ -1138,6 +1146,21 @@
 
     </main>
 
+    <div class="hero-footer-info" aria-label="Elérhetőség">
+      <div class="hero-footer-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        <span>+36 30 260 57 56</span>
+      </div>
+      <div class="hero-footer-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Kecskemét és 30 km körzete</span>
+      </div>
+      <div class="hero-footer-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <span>H–P 08:00–18:00</span>
+      </div>
+    </div>
+
   </div>
 
   <!-- Right image panel with clip-path reveal -->
@@ -1150,7 +1173,7 @@
   <div class="container">
     <div class="trust-grid" role="list">
 
-      <div class="trust-item" role="listitem">
+      <div class="trust-item reveal" role="listitem">
         <div class="trust-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
@@ -1160,7 +1183,7 @@
         </div>
       </div>
 
-      <div class="trust-item" role="listitem">
+      <div class="trust-item reveal" role="listitem" style="transition-delay:0.1s">
         <div class="trust-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
@@ -1170,7 +1193,7 @@
         </div>
       </div>
 
-      <div class="trust-item" role="listitem">
+      <div class="trust-item reveal" role="listitem" style="transition-delay:0.2s">
         <div class="trust-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
@@ -1180,7 +1203,7 @@
         </div>
       </div>
 
-      <div class="trust-item" role="listitem">
+      <div class="trust-item reveal" role="listitem" style="transition-delay:0.3s">
         <div class="trust-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         </div>
@@ -1208,7 +1231,7 @@
     <!-- Feature card -->
     <div class="service-feature reveal" style="margin-bottom:24px;">
       <div class="service-feature-photo">
-        <img src="https://images.unsplash.com/photo-1561400555-786780284b67?auto=format&fit=crop&w=900&q=80" alt="Kazánszerelő munkája közben" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Kazánszerelő munkája közben" loading="lazy" />
       </div>
       <div class="service-feature-body">
         <div class="service-feature-label">Legkeresettebb</div>
@@ -1226,7 +1249,7 @@
     <div class="services-grid">
 
       <article class="service-card reveal" role="listitem">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1601914697928-0b536e76d048?auto=format&fit=crop&w=600&q=75" alt="Kazán" loading="lazy" />
+        <img class="service-card-photo" src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=75" alt="Kazán" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
@@ -1238,7 +1261,7 @@
       </article>
 
       <article class="service-card reveal" role="listitem" style="transition-delay:0.08s">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1661745797171-ac2861891e12?auto=format&fit=crop&w=600&q=75" alt="Kazán beüzemelés" loading="lazy" />
+        <img class="service-card-photo" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=75" alt="Kazán beüzemelés" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -1250,7 +1273,7 @@
       </article>
 
       <article class="service-card reveal" role="listitem" style="transition-delay:0.16s">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1650551182991-b07558247564?auto=format&fit=crop&w=600&q=75" alt="Fűtési rendszer" loading="lazy" />
+        <img class="service-card-photo" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=75" alt="Fűtési rendszer karbantartás" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/></svg>
@@ -1315,7 +1338,7 @@
 </section>
 
 <!-- ═══ GALLERY STRIP ════════════════════════════════════════ -->
-<section id="gallery" aria-label="Képgaléria">
+<section id="gallery" aria-label="Képgaléria" style="opacity:0;transition:opacity 0.9s ease;" data-fade-section>
   <div class="gallery-track" role="list">
     <div class="gallery-item" role="listitem">
       <img src="https://images.unsplash.com/photo-1561480337-03eb1b6795a2?auto=format&fit=crop&w=800&q=80" alt="Szakember kazán beüzemelésnél" loading="lazy" />
@@ -1326,7 +1349,7 @@
       <div class="gallery-item-label">Gyors Javítás</div>
     </div>
     <div class="gallery-item" role="listitem">
-      <img src="https://images.unsplash.com/photo-1660330589827-da8ab7dd3c02?auto=format&fit=crop&w=800&q=80" alt="Fűtési rendszer karbantartás" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Fűtési rendszer karbantartás" loading="lazy" />
       <div class="gallery-item-label">Rendszeres Karbantartás</div>
     </div>
   </div>
@@ -1339,10 +1362,10 @@
 
       <div class="about-photo-wrap reveal-left">
         <div class="about-photo-frame">
-          <img src="https://images.unsplash.com/photo-1642749776312-aa42ce20c9f5?auto=format&fit=crop&w=900&q=80" alt="Polyák Zoltán kazánszerelő" loading="lazy" />
+          <img src="524116126_3079032585598254_8750569697232109983_n.jpg" alt="Polyák Zoltán kazánszerelő" loading="lazy" />
         </div>
         <div class="about-badge" aria-label="15+ év tapasztalat">
-          <div class="about-badge-num">15+</div>
+          <div class="about-badge-num" data-count="15" data-suffix="+">15+</div>
           <div class="about-badge-label">Év tapasztalat</div>
         </div>
       </div>
@@ -1687,10 +1710,22 @@
 
 <!-- ═══ SCRIPTS ══════════════════════════════════════════════ -->
 <script>
-  /* Nav scroll */
+  /* Nav scroll + hide-on-scroll */
   const nav = document.getElementById('nav');
+  let lastScrollY = 0;
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 48);
+    const y = window.scrollY;
+    if (y < 12) {
+      nav.classList.remove('nav-hidden', 'scrolled');
+    } else {
+      nav.classList.add('scrolled');
+      if (y > lastScrollY + 6) {
+        nav.classList.add('nav-hidden');
+      } else if (y < lastScrollY - 6) {
+        nav.classList.remove('nav-hidden');
+      }
+    }
+    lastScrollY = y;
   }, { passive: true });
 
   /* Mobile nav */
@@ -1733,6 +1768,17 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObs.observe(el));
+
+  /* Gallery + brands section fade */
+  const fadeSectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        fadeSectionObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('[data-fade-section]').forEach(el => fadeSectionObs.observe(el));
 
   /* Counter animation */
   function animateCount(el) {
