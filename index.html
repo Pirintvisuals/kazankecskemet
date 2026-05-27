@@ -264,17 +264,25 @@
     }
 
     /* Logo — always white on dark nav */
-    .nav-logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
-    .nav-logo-img-wrap {
-      height: 52px; display: flex; align-items: center;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 10px; padding: 6px 12px;
-      transition: background 0.2s;
+    @keyframes navLogoIn {
+      from { opacity: 0; transform: translateX(-14px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
-    .nav-logo:hover .nav-logo-img-wrap { background: rgba(255,255,255,0.14); }
+    @keyframes navLinkIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      animation: navLogoIn 0.55s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .nav-logo-img-wrap {
+      height: 44px; display: flex; align-items: center;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+    }
+    .nav-logo:hover .nav-logo-img-wrap { transform: scale(1.08); }
     .nav-logo-img-wrap img {
-      height: 38px; width: auto;
+      height: 36px; width: auto;
       filter: brightness(0) invert(1);
       display: block;
     }
@@ -287,23 +295,37 @@
     .nav-logo-sub { font-size: 0.7rem; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.04em; }
 
     .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links li { animation: navLinkIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+    .nav-links li:nth-child(1) { animation-delay: 0.18s; }
+    .nav-links li:nth-child(2) { animation-delay: 0.24s; }
+    .nav-links li:nth-child(3) { animation-delay: 0.30s; }
+    .nav-links li:nth-child(4) { animation-delay: 0.36s; }
     .nav-links a {
+      position: relative;
       font-size: 0.875rem; font-weight: 500;
-      color: rgba(255,255,255,0.68);
+      color: rgba(255,255,255,0.62);
       padding: 8px 14px; border-radius: var(--radius-sm);
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.22s;
     }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 2px; left: 14px; right: 14px; height: 1.5px;
+      background: #7DD3FC; border-radius: 2px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { transform: scaleX(1); }
 
     .nav-cta {
       display: flex; align-items: center; gap: 8px;
       background: var(--blue); color: #fff;
       font-family: var(--font-head); font-size: 0.875rem; font-weight: 600;
       padding: 10px 22px; border-radius: var(--radius-sm);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      transition: background 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
       cursor: pointer;
+      animation: navLinkIn 0.5s 0.42s cubic-bezier(0.22,1,0.36,1) both;
     }
-    .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: var(--shadow-blue); }
+    .nav-cta:hover { background: var(--blue-dark); transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-blue); }
 
     .nav-hamburger {
       display: none; flex-direction: column; gap: 5px;
@@ -332,39 +354,19 @@
     /* Left content panel */
     .hero-left {
       position: relative; z-index: 2;
-      display: flex; flex-direction: column; justify-content: space-between;
-      width: 50%; padding: 44px 48px 40px;
-    }
-
-    /* Logo header */
-    .hero-logo-wrap {
-      display: flex; align-items: center; gap: 14px;
-      opacity: 0; transform: translateY(16px);
-      animation: heroIn 0.6s 0.2s cubic-bezier(0.22,1,0.36,1) forwards;
-    }
-    .hero-logo-wrap img {
-      height: 40px; width: auto;
-      filter: brightness(0);
-    }
-    .hero-logo-name {
-      font-family: var(--font-head); font-size: 1.05rem; font-weight: 800;
-      color: var(--navy); letter-spacing: -0.01em;
-    }
-    .hero-logo-name span { color: var(--blue); }
-    .hero-logo-slogan {
-      font-size: 0.63rem; letter-spacing: 0.18em;
-      color: var(--text-muted); text-transform: uppercase; margin-top: 3px;
+      display: flex; flex-direction: column; justify-content: center;
+      width: 50%; padding: 72px 56px 72px 48px;
     }
 
     /* Availability badge */
     .hero-avail {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(3,105,161,0.08); border: 1px solid rgba(3,105,161,0.2);
-      border-radius: 100px; padding: 6px 16px;
+      border-radius: 100px; padding: 7px 18px;
       font-size: 0.76rem; font-weight: 600; color: var(--blue);
-      margin-bottom: 20px; width: fit-content;
+      margin-bottom: 32px; width: fit-content;
       opacity: 0; transform: translateY(12px);
-      animation: heroIn 0.6s 0.32s cubic-bezier(0.22,1,0.36,1) forwards;
+      animation: heroIn 0.6s 0.28s cubic-bezier(0.22,1,0.36,1) forwards;
     }
     .hero-avail-dot {
       width: 7px; height: 7px; background: #22C55E; border-radius: 50%;
@@ -376,55 +378,52 @@
     }
 
     /* Main content */
-    .hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 16px 0; }
+    .hero-main { display: flex; flex-direction: column; }
 
     .hero-h1 {
       font-family: var(--font-head);
-      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-size: clamp(2.6rem, 4.4vw, 4rem);
       font-weight: 800; line-height: 1.06; letter-spacing: -0.03em;
       color: var(--navy);
       opacity: 0; transform: translateY(20px);
-      animation: heroIn 0.8s 0.42s cubic-bezier(0.22,1,0.36,1) forwards;
+      animation: heroIn 0.8s 0.38s cubic-bezier(0.22,1,0.36,1) forwards;
     }
     .hero-h1 .hl-blue { color: var(--blue); }
 
     .hero-accent-line {
-      width: 56px; height: 4px;
+      width: 48px; height: 3px;
       background: var(--blue); border-radius: 2px;
-      margin: 20px 0;
-      opacity: 0; transform: translateY(12px);
-      animation: heroIn 0.5s 0.54s cubic-bezier(0.22,1,0.36,1) forwards;
+      margin: 28px 0 26px;
+      opacity: 0; transform: scaleX(0); transform-origin: left;
+      animation: heroAccent 0.6s 0.52s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes heroAccent {
+      to { opacity: 1; transform: scaleX(1); }
     }
 
     .hero-sub-text {
-      font-size: 1rem; color: var(--text-muted);
-      line-height: 1.75; max-width: 440px; margin-bottom: 24px;
+      font-size: 1.05rem; color: var(--text-muted);
+      line-height: 1.78; max-width: 420px; margin-bottom: 40px;
       opacity: 0; transform: translateY(14px);
-      animation: heroIn 0.7s 0.64s cubic-bezier(0.22,1,0.36,1) forwards;
+      animation: heroIn 0.7s 0.60s cubic-bezier(0.22,1,0.36,1) forwards;
     }
 
+    .hero-cta-row {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      opacity: 0; transform: translateY(12px);
+      animation: heroIn 0.6s 0.74s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
     .hero-cta-link {
       display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--font-head); font-size: 0.84rem; font-weight: 700;
-      letter-spacing: 0.18em; color: var(--blue); text-transform: uppercase;
-      transition: color 0.2s, gap 0.2s;
-      opacity: 0; transform: translateY(12px);
-      animation: heroIn 0.6s 0.76s cubic-bezier(0.22,1,0.36,1) forwards;
+      letter-spacing: 0.16em; color: var(--blue); text-transform: uppercase;
+      transition: color 0.2s, gap 0.22s cubic-bezier(0.34,1.56,0.64,1);
     }
-    .hero-cta-link:hover { color: var(--blue-dark); gap: 14px; }
-
-    /* Footer contact row */
-    .hero-footer-info {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-      padding-top: 28px; border-top: 1px solid var(--border);
-      opacity: 0; transform: translateY(12px);
-      animation: heroIn 0.6s 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    .hero-cta-link:hover { color: var(--blue-dark); gap: 15px; }
+    .hero-cta-phone {
+      font-size: 0.88rem; color: var(--text-muted); font-weight: 500;
+      padding-left: 20px; border-left: 1px solid var(--border);
     }
-    .hero-footer-item {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;
-    }
-    .hero-footer-item svg { color: var(--blue); flex-shrink: 0; }
 
     /* Right image panel */
     .hero-right {
@@ -461,6 +460,85 @@
     .trust-text-title { font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: #fff; }
     .trust-text-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
+
+    /* ── PROCESS ──────────────────────────────────────────────── */
+    #process { padding: 88px 0; background: var(--off-white); }
+    .process-header { text-align: center; max-width: 520px; margin: 0 auto 64px; }
+
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      position: relative; gap: 0;
+    }
+    /* connecting line behind the steps */
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 32px; left: calc(12.5% + 32px); right: calc(12.5% + 32px); height: 1px;
+      background: linear-gradient(90deg, var(--blue) 0%, rgba(3,105,161,0.2) 100%);
+      z-index: 0;
+    }
+    .process-step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 20px;
+      position: relative; z-index: 1;
+    }
+    .process-num-wrap {
+      position: relative; margin-bottom: 28px;
+    }
+    .process-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--white); border: 2px solid var(--blue);
+      font-family: var(--font-head); font-size: 1.25rem; font-weight: 800;
+      color: var(--blue);
+      transition: background 0.28s, color 0.28s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s;
+      position: relative; z-index: 1;
+    }
+    .process-step:hover .process-num {
+      background: var(--blue); color: #fff;
+      transform: scale(1.1);
+      box-shadow: var(--shadow-blue);
+    }
+    .process-num-ring {
+      position: absolute; inset: -8px; border-radius: 50%;
+      border: 1px solid rgba(3,105,161,0.18);
+      transition: border-color 0.28s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .process-step:hover .process-num-ring {
+      border-color: rgba(3,105,161,0.4);
+      transform: scale(1.05);
+    }
+    .process-icon {
+      width: 40px; height: 40px;
+      background: var(--blue-light); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); margin: 0 auto 16px;
+      transition: background 0.25s, color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .process-step:hover .process-icon { background: var(--blue); color: #fff; transform: scale(1.08); }
+    .process-step-title {
+      font-family: var(--font-head); font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px; line-height: 1.3;
+    }
+    .process-step-desc {
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .process-step-tag {
+      display: inline-block; margin-top: 14px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue);
+      padding: 4px 10px; border-radius: 100px;
+      background: rgba(3,105,161,0.08); border: 1px solid rgba(3,105,161,0.15);
+    }
+
+    @media (max-width: 768px) {
+      .process-steps {
+        grid-template-columns: 1fr 1fr; gap: 40px 20px;
+      }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; gap: 36px; }
+    }
 
     /* ── SERVICES ──────────────────────────────────────────────── */
     #services { padding: 76px 0; background: var(--white); }
@@ -628,37 +706,81 @@
     .gallery-item:hover .gallery-item-label { transform: translateY(0); opacity: 1; }
 
     /* ── TESTIMONIALS ──────────────────────────────────────────── */
-    #testimonials { padding: 76px 0; background: var(--white); }
-    .testimonials-header { text-align: center; max-width: 480px; margin: 0 auto 44px; }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 880px; margin: 0 auto; }
+    #testimonials { padding: 88px 0 80px; background: var(--navy); overflow: hidden; }
+    .testimonials-header { text-align: center; max-width: 540px; margin: 0 auto 52px; }
+    #testimonials .section-headline { color: #fff; }
+    #testimonials .section-sub { color: rgba(255,255,255,0.48); }
+    #testimonials .section-label { color: #7DD3FC; }
+    #testimonials .section-label::before { background: #7DD3FC; }
 
-    .testimonial-card {
-      background: var(--off-white); border: 1px solid var(--border);
-      border-radius: var(--radius-md); padding: 36px;
-      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
-      position: relative; overflow: hidden;
+    /* aggregate rating bar */
+    .t-rating-bar {
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      margin-bottom: 52px; flex-wrap: wrap; row-gap: 20px;
     }
-    .testimonial-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--blue), #60A5FA);
-      opacity: 0; transition: opacity 0.3s;
+    .t-rating-score { display: flex; flex-direction: column; align-items: center; }
+    .t-score-num {
+      font-family: var(--font-head); font-size: 3.6rem; font-weight: 800;
+      color: #fff; line-height: 1; letter-spacing: -0.04em;
     }
-    .testimonial-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: rgba(26,86,232,0.2); }
-    .testimonial-card:hover::before { opacity: 1; }
+    .t-score-stars { display: flex; gap: 4px; margin: 10px 0 6px; }
+    .t-score-label { font-size: 0.8rem; color: rgba(255,255,255,0.38); letter-spacing: 0.02em; }
+    .t-rating-sep { width: 1px; height: 56px; background: rgba(255,255,255,0.1); }
+    .t-rating-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .t-stat-num {
+      font-family: var(--font-head); font-size: 1.6rem; font-weight: 800;
+      color: #fff; letter-spacing: -0.03em;
+    }
+    .t-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.38); }
 
-    .t-quote { color: var(--blue); opacity: 0.25; margin-bottom: 18px; }
-    .t-text { font-size: 1rem; color: var(--text-mid); line-height: 1.78; font-style: italic; margin-bottom: 24px; }
-    .t-author { display: flex; align-items: center; gap: 12px; }
-    .t-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--blue-light); border: 2px solid rgba(26,86,232,0.2);
+    /* marquee tracks */
+    .t-tracks { display: flex; flex-direction: column; gap: 14px; }
+    .t-track-wrap {
+      overflow: hidden; position: relative;
+    }
+    .t-track-wrap::before,
+    .t-track-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 140px; z-index: 1; pointer-events: none;
+    }
+    .t-track-wrap::before { left: 0; background: linear-gradient(to right, var(--navy), transparent); }
+    .t-track-wrap::after  { right: 0; background: linear-gradient(to left,  var(--navy), transparent); }
+    .t-track {
+      display: flex; gap: 14px; width: max-content;
+      animation: tScroll 42s linear infinite;
+    }
+    .t-track.t-reverse { animation: tScrollR 35s linear infinite; }
+    .t-track:hover, .t-track.t-reverse:hover { animation-play-state: paused; }
+    @keyframes tScroll  { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+    @keyframes tScrollR { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+
+    /* card */
+    .t-card {
+      flex-shrink: 0; width: 310px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md); padding: 22px 24px;
+      cursor: default;
+      transition: background 0.25s, border-color 0.25s, transform 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    .t-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(125,211,252,0.22);
+      transform: translateY(-4px);
+    }
+    .t-card-stars { display: flex; gap: 3px; margin-bottom: 13px; }
+    .t-card-text {
+      font-size: 0.895rem; color: rgba(255,255,255,0.7);
+      line-height: 1.68; margin-bottom: 18px; font-style: italic;
+    }
+    .t-card-author { display: flex; align-items: center; gap: 10px; }
+    .t-card-avatar {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(3,105,161,0.38); border: 1px solid rgba(125,211,252,0.18);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; color: var(--blue);
-      flex-shrink: 0;
+      font-family: var(--font-head); font-size: 0.68rem; font-weight: 700; color: #7DD3FC;
     }
-    .t-name { font-family: var(--font-head); font-size: 0.92rem; font-weight: 700; color: var(--navy); }
-    .t-loc { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-    .t-stars { display: flex; gap: 3px; margin-left: auto; }
+    .t-card-name { font-family: var(--font-head); font-size: 0.875rem; font-weight: 700; color: #fff; }
+    .t-card-loc  { font-size: 0.73rem; color: rgba(255,255,255,0.36); margin-top: 2px; }
 
     /* ── FAQ ──────────────────────────────────────────────────── */
     #faq { padding: 76px 0; background: var(--off-white); }
@@ -1014,7 +1136,7 @@
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .service-feature { grid-template-columns: 1fr; }
       .service-feature-photo { min-height: 300px; }
-      .hero-left { width: 55%; padding: 36px 32px 32px; }
+      .hero-left { width: 55%; padding: 56px 40px 56px 36px; }
       .hero-right { width: 52%; }
     }
     @media (max-width: 768px) {
@@ -1023,7 +1145,7 @@
       .nav-hamburger { display: flex; }
       /* Hero: stack vertically */
       #hero { flex-direction: column; }
-      .hero-left { width: 100%; padding: 32px 24px 36px; }
+      .hero-left { width: 100%; padding: 48px 24px 44px; }
       .hero-right {
         position: relative; top: auto; right: auto;
         width: 100%; height: 260px;
@@ -1033,7 +1155,6 @@
         animation: heroFadeIn 0.8s 0.4s ease-out forwards;
       }
       @keyframes heroFadeIn { to { opacity: 1; } }
-      .hero-footer-info { grid-template-columns: 1fr; gap: 12px; }
       /* Other */
       .trust-grid { grid-template-columns: repeat(2,1fr); }
       .trust-item:nth-child(2) { border-right: none; }
@@ -1044,7 +1165,7 @@
       .service-card-wide .service-cta { width: 100% !important; justify-content: center; }
       .gallery-track { flex-direction: column; }
       .gallery-item { flex: 0 0 auto; height: 260px; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .t-card { width: 270px; }
       .cta-inner { flex-direction: column; align-items: flex-start; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
       #float-call { display: block; }
@@ -1059,8 +1180,9 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
-      .hero-logo-wrap, .hero-avail, .hero-h1, .hero-accent-line,
-      .hero-sub-text, .hero-cta-link, .hero-footer-info { opacity: 1; transform: none; }
+      .hero-avail, .hero-h1, .hero-accent-line,
+      .hero-sub-text, .hero-cta-row { opacity: 1; transform: none; }
+      .hero-accent-line { transform: scaleX(1) !important; }
       .hero-right { clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%) !important; opacity: 1; }
     }
   </style>
@@ -1084,6 +1206,7 @@
 
       <ul class="nav-links" role="list">
         <li><a href="#services">Szolgáltatások</a></li>
+        <li><a href="#process">Hogyan dolgozunk</a></li>
         <li><a href="#about">Rólam</a></li>
         <li><a href="#testimonials">Vélemények</a></li>
         <li><a href="#contact">Kapcsolat</a></li>
@@ -1103,6 +1226,7 @@
 
 <div id="mobile-nav" role="dialog" aria-label="Mobilmenü">
   <a href="#services" class="mobile-nav-link" onclick="closeNav()">Szolgáltatások</a>
+  <a href="#process" class="mobile-nav-link" onclick="closeNav()">Hogyan dolgozunk</a>
   <a href="#about" class="mobile-nav-link" onclick="closeNav()">Rólam</a>
   <a href="#testimonials" class="mobile-nav-link" onclick="closeNav()">Vélemények</a>
   <a href="#contact" class="mobile-nav-link" onclick="closeNav()">Kapcsolat</a>
@@ -1139,27 +1263,15 @@
         Kazán javítás, szerviz és beüzemelés Kecskeméten – gyors kiszállással, garanciával.
       </p>
 
-      <a href="tel:+36302605756" class="hero-cta-link" aria-label="Hívjon most: +36 30 260 57 56">
-        HÍVJON MOST
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
+      <div class="hero-cta-row">
+        <a href="tel:+36302605756" class="hero-cta-link" aria-label="Hívjon most: +36 30 260 57 56">
+          HÍVJON MOST
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <span class="hero-cta-phone">+36 30 260 57 56</span>
+      </div>
 
     </main>
-
-    <div class="hero-footer-info" aria-label="Elérhetőség">
-      <div class="hero-footer-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-        <span>+36 30 260 57 56</span>
-      </div>
-      <div class="hero-footer-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Kecskemét és 30 km körzete</span>
-      </div>
-      <div class="hero-footer-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        <span>H–P 08:00–18:00</span>
-      </div>
-    </div>
 
   </div>
 
@@ -1211,6 +1323,75 @@
           <div class="trust-text-title">Korrekt árak</div>
           <div class="trust-text-sub">Átlátható, előzetes árajánlat</div>
         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROCESS ══════════════════════════════════════════════ -->
+<section id="process" aria-labelledby="process-headline">
+  <div class="container">
+
+    <div class="process-header reveal">
+      <div class="section-label">Hogyan dolgozunk</div>
+      <h2 class="section-headline" id="process-headline">Négy lépés – és <span style="color:var(--blue)">újra meleg</span> lesz</h2>
+      <p class="section-sub">Átlátható folyamat, meglepetések nélkül. Hívástól a befejezésig.</p>
+    </div>
+
+    <div class="process-steps">
+
+      <div class="process-step reveal" style="transition-delay:0.05s">
+        <div class="process-num-wrap">
+          <div class="process-num-ring"></div>
+          <div class="process-num">01</div>
+        </div>
+        <div class="process-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        </div>
+        <div class="process-step-title">Hívjon vagy írjon</div>
+        <p class="process-step-desc">Néhány szó a hibáról elegendő. Megbeszéljük a részleteket és egyeztetünk egy megfelelő időpontot.</p>
+        <span class="process-step-tag">Percek alatt</span>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.15s">
+        <div class="process-num-wrap">
+          <div class="process-num-ring"></div>
+          <div class="process-num">02</div>
+        </div>
+        <div class="process-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="process-step-title">Gyors kiszállás</div>
+        <p class="process-step-desc">Kecskemét és 30 km-es körzetén belül a lehető leghamarabb érkezünk – általában aznap vagy másnap.</p>
+        <span class="process-step-tag">Aznap is</span>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.25s">
+        <div class="process-num-wrap">
+          <div class="process-num-ring"></div>
+          <div class="process-num">03</div>
+        </div>
+        <div class="process-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="process-step-title">Diagnosztika & árajánlat</div>
+        <p class="process-step-desc">Helyszínen feltárjuk a hibát és előzetes, kötött árajánlatot adunk. Meglepetés-számla nincs.</p>
+        <span class="process-step-tag">Átlátható ár</span>
+      </div>
+
+      <div class="process-step reveal" style="transition-delay:0.35s">
+        <div class="process-num-wrap">
+          <div class="process-num-ring"></div>
+          <div class="process-num">04</div>
+        </div>
+        <div class="process-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="process-step-title">Javítás & garancia</div>
+        <p class="process-step-desc">Elvégezzük a munkát, átadjuk a számlát és a garanciajegyet. Ön ismét kellemes melegben van.</p>
+        <span class="process-step-tag">Garanciával</span>
       </div>
 
     </div>
@@ -1337,23 +1518,6 @@
   </div>
 </section>
 
-<!-- ═══ GALLERY STRIP ════════════════════════════════════════ -->
-<section id="gallery" aria-label="Képgaléria" style="opacity:0;transition:opacity 0.9s ease;" data-fade-section>
-  <div class="gallery-track" role="list">
-    <div class="gallery-item" role="listitem">
-      <img src="https://images.unsplash.com/photo-1561480337-03eb1b6795a2?auto=format&fit=crop&w=800&q=80" alt="Szakember kazán beüzemelésnél" loading="lazy" />
-      <div class="gallery-item-label">Profi Beüzemelés</div>
-    </div>
-    <div class="gallery-item" role="listitem">
-      <img src="https://images.unsplash.com/photo-1596495717678-69df9f89c2a3?auto=format&fit=crop&w=800&q=80" alt="Kazán javítás helyszínen" loading="lazy" />
-      <div class="gallery-item-label">Gyors Javítás</div>
-    </div>
-    <div class="gallery-item" role="listitem">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Fűtési rendszer karbantartás" loading="lazy" />
-      <div class="gallery-item-label">Rendszeres Karbantartás</div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ ABOUT ════════════════════════════════════════════════ -->
 <section id="about" aria-labelledby="about-headline">
@@ -1416,57 +1580,199 @@
 
 <!-- ═══ TESTIMONIALS ═════════════════════════════════════════ -->
 <section id="testimonials" aria-labelledby="testimonials-headline">
+
   <div class="container">
     <div class="testimonials-header reveal">
       <div class="section-label">Vélemények</div>
-      <h2 class="section-headline" id="testimonials-headline">Mit mondanak ügyfeleink?</h2>
+      <h2 class="section-headline" id="testimonials-headline">Ügyfeleink mondják a legjobban</h2>
+      <p class="section-sub">Valódi visszajelzések – megbízható szerviz, elégedett tulajdonosok.</p>
     </div>
 
-    <div class="testimonials-grid">
+    <div class="t-rating-bar reveal">
+      <div class="t-rating-score">
+        <div class="t-score-num">4.9</div>
+        <div class="t-score-stars" aria-label="4.9 csillag">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="t-score-label">Google értékelés</div>
+      </div>
 
-      <article class="testimonial-card reveal" aria-label="Kovács Gábor véleménye">
-        <div class="t-quote" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.685.76-2.205.663-.52 1.47-.78 2.43-.78v-2.23c-1.49 0-2.78.43-3.87 1.29-1.08.86-1.62 2.07-1.62 3.64 0 1.12.3 2.06.9 2.82.6.76 1.49 1.14 2.67 1.14.97 0 1.74-.28 2.31-.85.57-.57.85-1.29.85-2.17zm8.5 0c0-.88-.23-1.618-.69-2.217-.326-.42-.768-.692-1.327-.817-.55-.124-1.07-.13-1.54-.022-.16-.95.1-1.685.76-2.205.663-.52 1.47-.78 2.43-.78v-2.23c-1.49 0-2.78.43-3.87 1.29-1.08.86-1.62 2.07-1.62 3.64 0 1.12.3 2.06.9 2.82.6.76 1.49 1.14 2.67 1.14.97 0 1.74-.28 2.31-.85.57-.57.85-1.29.85-2.17z"/></svg>
-        </div>
-        <p class="t-text">„Télen, mínuszban mondta be a kazánunk, hogy elege van. Zoltánt hívtam reggel, és még aznap délelőtt itt volt. Két órán belül ment a fűtés. Korrekt ár, precíz munka – nem keresek más szervizt."</p>
-        <div class="t-author">
-          <div class="t-avatar" aria-hidden="true">GK</div>
-          <div>
-            <div class="t-name">Kovács Gábor</div>
-            <div class="t-loc">Kecskemét, Ariston tulajdonos</div>
-          </div>
-          <div class="t-stars" aria-label="5 csillagos értékelés">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-        </div>
-      </article>
+      <div class="t-rating-sep" aria-hidden="true"></div>
 
-      <article class="testimonial-card reveal" style="transition-delay:0.1s" aria-label="Szabó Katalin véleménye">
-        <div class="t-quote" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.685.76-2.205.663-.52 1.47-.78 2.43-.78v-2.23c-1.49 0-2.78.43-3.87 1.29-1.08.86-1.62 2.07-1.62 3.64 0 1.12.3 2.06.9 2.82.6.76 1.49 1.14 2.67 1.14.97 0 1.74-.28 2.31-.85.57-.57.85-1.29.85-2.17zm8.5 0c0-.88-.23-1.618-.69-2.217-.326-.42-.768-.692-1.327-.817-.55-.124-1.07-.13-1.54-.022-.16-.95.1-1.685.76-2.205.663-.52 1.47-.78 2.43-.78v-2.23c-1.49 0-2.78.43-3.87 1.29-1.08.86-1.62 2.07-1.62 3.64 0 1.12.3 2.06.9 2.82.6.76 1.49 1.14 2.67 1.14.97 0 1.74-.28 2.31-.85.57-.57.85-1.29.85-2.17z"/></svg>
-        </div>
-        <p class="t-text">„Gázbiztonsági felülvizsgálatot kellett csináltatni. Zoltán alapos, szakszerű, és mindent elmagyarázott – nem csak aláírta és ment. Ajánlom mindenkinek, akinek fontos a biztonság és a megbízhatóság."</p>
-        <div class="t-author">
-          <div class="t-avatar" aria-hidden="true">SzK</div>
-          <div>
-            <div class="t-name">Szabó Katalin</div>
-            <div class="t-loc">Kecskemét, Bosch tulajdonos</div>
-          </div>
-          <div class="t-stars" aria-label="5 csillagos értékelés">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-        </div>
-      </article>
+      <div class="t-rating-stat">
+        <div class="t-stat-num">120+</div>
+        <div class="t-stat-label">Vélemény</div>
+      </div>
 
+      <div class="t-rating-sep" aria-hidden="true"></div>
+
+      <div class="t-rating-stat">
+        <div class="t-stat-num">15+</div>
+        <div class="t-stat-label">Év tapasztalat</div>
+      </div>
+
+      <div class="t-rating-sep" aria-hidden="true"></div>
+
+      <div class="t-rating-stat">
+        <div class="t-stat-num">100%</div>
+        <div class="t-stat-label">Garanciával</div>
+      </div>
     </div>
+  </div>
+
+  <!-- full-bleed marquee tracks -->
+  <div class="t-tracks" aria-label="Ügyfélvélemények">
+
+    <!-- Row 1 – scrolls left -->
+    <div class="t-track-wrap">
+      <div class="t-track" role="list">
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Télen, mínuszban mondta be a kazánunk, hogy elege van. Zoltánt hívtam reggel, és még aznap délelőtt itt volt. Két órán belül ment a fűtés. Korrekt ár, precíz munka."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">KG</div>
+            <div><div class="t-card-name">Kovács Gábor</div><div class="t-card-loc">Kecskemét · Ariston</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Immergas kazáncsere – gyors, tiszta, precíz. Zoltán mindent elmagyarázott az új készülékről, és az összes papírt rendben átadta. Szuper profizmus."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">NP</div>
+            <div><div class="t-card-name">Nagy Péter</div><div class="t-card-loc">Kecskemét · Immergas</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Fűtési rendszer átmosást végeztett velünk. Utána látható volt a különbség: minden radiátor egyenletesen melegít, a gázszámla is csökkent. Megérte százszor."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">HM</div>
+            <div><div class="t-card-name">Horváth Mária</div><div class="t-card-loc">Lajosmizse · Vaillant</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Évenkénti karbantartásra járunk Zoltánhoz. Mindig időre jön, alaposan elvégzi a munkát, és soha nem próbál fölösleges javításokat eladni. Megbízható ember."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">FE</div>
+            <div><div class="t-card-name">Fekete Erzsébet</div><div class="t-card-loc">Kecskemét · Bosch</div></div>
+          </div>
+        </article>
+
+        <!-- duplicate for seamless loop -->
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Télen, mínuszban mondta be a kazánunk, hogy elege van. Zoltánt hívtam reggel, és még aznap délelőtt itt volt. Két órán belül ment a fűtés. Korrekt ár, precíz munka."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">KG</div><div><div class="t-card-name">Kovács Gábor</div><div class="t-card-loc">Kecskemét · Ariston</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Immergas kazáncsere – gyors, tiszta, precíz. Zoltán mindent elmagyarázott az új készülékről, és az összes papírt rendben átadta. Szuper profizmus."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">NP</div><div><div class="t-card-name">Nagy Péter</div><div class="t-card-loc">Kecskemét · Immergas</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Fűtési rendszer átmosást végeztett velünk. Utána látható volt a különbség: minden radiátor egyenletesen melegít, a gázszámla is csökkent. Megérte százszor."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">HM</div><div><div class="t-card-name">Horváth Mária</div><div class="t-card-loc">Lajosmizse · Vaillant</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Évenkénti karbantartásra járunk Zoltánhoz. Mindig időre jön, alaposan elvégzi a munkát, és soha nem próbál fölösleges javításokat eladni. Megbízható ember."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">FE</div><div><div class="t-card-name">Fekete Erzsébet</div><div class="t-card-loc">Kecskemét · Bosch</div></div></div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Row 2 – scrolls right -->
+    <div class="t-track-wrap">
+      <div class="t-track t-reverse" role="list">
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Gázbiztonsági felülvizsgálatot kellett csináltatni. Zoltán alapos, szakszerű, mindent elmagyarázott – nem csak aláírta és ment. Ajánlom mindenkinek."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">SzK</div>
+            <div><div class="t-card-name">Szabó Katalin</div><div class="t-card-loc">Kecskemét · Bosch</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Kiskunfélegyházáról hívtam Zoltánt, mert az Immergas kazánom nem gyulladt be. Gyorsan kijött, azonosította a hibát és megjavította. Nagyon elégedett vagyok."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">TL</div>
+            <div><div class="t-card-name">Tóth László</div><div class="t-card-loc">Kiskunfélegyháza · Immergas</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Baxi kazánom sürgősen elromlott. Este felhívtam, másnap reggel már itt volt. A javítás gyors és korrekt volt. Ritkán találni ilyen gyors és megbízható szakembert."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">MA</div>
+            <div><div class="t-card-name">Molnár Attila</div><div class="t-card-loc">Kecskemét · Baxi</div></div>
+          </div>
+        </article>
+
+        <article class="t-card" role="listitem">
+          <div class="t-card-stars" aria-label="5 csillag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="t-card-text">„Új Ariston kazán beüzemelése – mindent a legjobb minőségben végzett el. Türelmes, alapos és kommunikatív. Már a szomszédoknak is ajánlottam."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar" aria-hidden="true">VJ</div>
+            <div><div class="t-card-name">Varga Judit</div><div class="t-card-loc">Kecskemét · Ariston</div></div>
+          </div>
+        </article>
+
+        <!-- duplicate for seamless loop -->
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Gázbiztonsági felülvizsgálatot kellett csináltatni. Zoltán alapos, szakszerű, mindent elmagyarázott – nem csak aláírta és ment. Ajánlom mindenkinek."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">SzK</div><div><div class="t-card-name">Szabó Katalin</div><div class="t-card-loc">Kecskemét · Bosch</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Kiskunfélegyházáról hívtam Zoltánt, mert az Immergas kazánom nem gyulladt be. Gyorsan kijött, azonosította a hibát és megjavította. Nagyon elégedett vagyok."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">TL</div><div><div class="t-card-name">Tóth László</div><div class="t-card-loc">Kiskunfélegyháza · Immergas</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Baxi kazánom sürgősen elromlott. Este felhívtam, másnap reggel már itt volt. A javítás gyors és korrekt volt. Ritkán találni ilyen gyors és megbízható szakembert."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">MA</div><div><div class="t-card-name">Molnár Attila</div><div class="t-card-loc">Kecskemét · Baxi</div></div></div>
+        </article>
+        <article class="t-card" role="listitem" aria-hidden="true">
+          <div class="t-card-stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="#FBBF24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <p class="t-card-text">„Új Ariston kazán beüzemelése – mindent a legjobb minőségben végzett el. Türelmes, alapos és kommunikatív. Már a szomszédoknak is ajánlottam."</p>
+          <div class="t-card-author"><div class="t-card-avatar" aria-hidden="true">VJ</div><div><div class="t-card-name">Varga Judit</div><div class="t-card-loc">Kecskemét · Ariston</div></div></div>
+        </article>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
