@@ -680,31 +680,6 @@
       display: flex; align-items: center; justify-content: center; color: var(--blue);
     }
 
-    /* ── GALLERY STRIP ─────────────────────────────────────────── */
-    #gallery { padding: 0; overflow: hidden; }
-    .gallery-track {
-      display: flex; gap: 0;
-    }
-    .gallery-item {
-      flex: 0 0 33.333%; position: relative; overflow: hidden;
-      height: 340px;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.4s;
-      filter: brightness(0.85);
-    }
-    .gallery-item:hover img { transform: scale(1.07); filter: brightness(1); }
-    .gallery-item-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 24px 24px 20px;
-      background: linear-gradient(to top, rgba(12,27,46,0.85) 0%, transparent 100%);
-      font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: #fff;
-      transform: translateY(4px); opacity: 0.85;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .gallery-item:hover .gallery-item-label { transform: translateY(0); opacity: 1; }
-
     /* ── TESTIMONIALS ──────────────────────────────────────────── */
     #testimonials { padding: 88px 0 80px; background: var(--navy); overflow: hidden; }
     .testimonials-header { text-align: center; max-width: 540px; margin: 0 auto 52px; }
@@ -853,7 +828,7 @@
     }
     .cta-bg-img {
       position: absolute; inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1920&q=70');
+      background-image: url('k%C3%A9pek/709699200_845407851487605_4922152442905902910_n.webp');
       background-size: cover; background-position: center;
       opacity: 0.12;
     }
@@ -1163,8 +1138,6 @@
       .services-grid { grid-template-columns: 1fr; }
       .service-card-wide .service-card-body { flex-direction: column; align-items: flex-start; }
       .service-card-wide .service-cta { width: 100% !important; justify-content: center; }
-      .gallery-track { flex-direction: column; }
-      .gallery-item { flex: 0 0 auto; height: 260px; }
       .t-card { width: 270px; }
       .cta-inner { flex-direction: column; align-items: flex-start; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
@@ -1177,6 +1150,59 @@
       .trust-item:first-child { border-top: none !important; }
       .service-card-wide .service-cta { width: 100% !important; justify-content: center; }
     }
+    /* ── GALLERY ───────────────────────────────────────────────── */
+    #gallery { padding: 88px 0; background: var(--off-white); }
+    .gallery-header { text-align: center; max-width: 560px; margin: 0 auto 48px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .gallery-tile {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--gray-light);
+      box-shadow: var(--shadow-sm);
+      cursor: zoom-in;
+      transition: box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gallery-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gallery-tile::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,23,42,0) 60%, rgba(15,23,42,0.35) 100%);
+      opacity: 0; transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .gallery-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md), 0 8px 24px rgba(3,105,161,0.18);
+    }
+    .gallery-tile:hover img { transform: scale(1.06); }
+    .gallery-tile:hover::after { opacity: 1; }
+    .gallery-tile:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+    .gallery-footnote {
+      margin-top: 32px; text-align: center;
+      font-size: 0.92rem; color: var(--text-muted);
+    }
+    .gallery-footnote a { color: var(--blue); font-weight: 600; }
+    .gallery-footnote a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      #gallery { padding: 64px 0; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .gallery-tile { aspect-ratio: 3 / 4; border-radius: var(--radius-sm); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
@@ -1207,6 +1233,7 @@
       <ul class="nav-links" role="list">
         <li><a href="#services">Szolgáltatások</a></li>
         <li><a href="#process">Hogyan dolgozunk</a></li>
+        <li><a href="#gallery">Munkáim</a></li>
         <li><a href="#about">Rólam</a></li>
         <li><a href="#testimonials">Vélemények</a></li>
         <li><a href="#contact">Kapcsolat</a></li>
@@ -1227,6 +1254,7 @@
 <div id="mobile-nav" role="dialog" aria-label="Mobilmenü">
   <a href="#services" class="mobile-nav-link" onclick="closeNav()">Szolgáltatások</a>
   <a href="#process" class="mobile-nav-link" onclick="closeNav()">Hogyan dolgozunk</a>
+  <a href="#gallery" class="mobile-nav-link" onclick="closeNav()">Munkáim</a>
   <a href="#about" class="mobile-nav-link" onclick="closeNav()">Rólam</a>
   <a href="#testimonials" class="mobile-nav-link" onclick="closeNav()">Vélemények</a>
   <a href="#contact" class="mobile-nav-link" onclick="closeNav()">Kapcsolat</a>
@@ -1244,11 +1272,6 @@
 
     <!-- Main content -->
     <main class="hero-main">
-
-      <div class="hero-avail" aria-label="Elérhető most">
-        <span class="hero-avail-dot" aria-hidden="true"></span>
-        Elérhető most
-      </div>
 
       <h1 class="hero-h1" id="hero-headline">
         Nem fűt a kazán?<br/>
@@ -1412,7 +1435,7 @@
     <!-- Feature card -->
     <div class="service-feature reveal" style="margin-bottom:24px;">
       <div class="service-feature-photo">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Kazánszerelő munkája közben" loading="lazy" />
+        <img src="k%C3%A9pek/707125326_918619997869657_1747506858485559298_n.webp" alt="Polyák Zoltán kazánszerelés közben Kecskeméten" loading="lazy" />
       </div>
       <div class="service-feature-body">
         <div class="service-feature-label">Legkeresettebb</div>
@@ -1430,7 +1453,7 @@
     <div class="services-grid">
 
       <article class="service-card reveal" role="listitem">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=75" alt="Kazán" loading="lazy" />
+        <img class="service-card-photo" src="k%C3%A9pek/707420684_1352835460072800_1841501831037842416_n.webp" alt="Új kazán telepítés Kecskeméten" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
@@ -1442,7 +1465,7 @@
       </article>
 
       <article class="service-card reveal" role="listitem" style="transition-delay:0.08s">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=75" alt="Kazán beüzemelés" loading="lazy" />
+        <img class="service-card-photo" src="k%C3%A9pek/707420684_981249194665501_7865748018828990854_n.webp" alt="Kazán beüzemelés és próbaüzem" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -1454,7 +1477,7 @@
       </article>
 
       <article class="service-card reveal" role="listitem" style="transition-delay:0.16s">
-        <img class="service-card-photo" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=75" alt="Fűtési rendszer karbantartás" loading="lazy" />
+        <img class="service-card-photo" src="k%C3%A9pek/707445157_1589615896497672_6999197818411514873_n.webp" alt="Kazán karbantartás és tisztítás" loading="lazy" />
         <div class="service-card-body">
           <div class="service-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/></svg>
@@ -1772,6 +1795,53 @@
 
       </div>
     </div>
+
+  </div>
+</section>
+
+<!-- ═══ GALLERY ══════════════════════════════════════════════ -->
+<section id="gallery" aria-labelledby="gallery-headline">
+  <div class="container">
+
+    <div class="gallery-header reveal">
+      <div class="section-label">Munkáim</div>
+      <h2 class="section-headline" id="gallery-headline">Tényleges munkák – <span style="color:var(--blue)">nem stockfotók</span></h2>
+      <p class="section-sub">Néhány friss kazánszerelés, csere és karbantartás Kecskemét környékéről. Minden képen a saját kezű munkám látható.</p>
+    </div>
+
+    <div class="gallery-grid" role="list">
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0">
+        <img src="k%C3%A9pek/707667883_1000358642393394_1460888495025001767_n.webp" alt="Kazán beüzemelés családi házban" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.06s">
+        <img src="k%C3%A9pek/707762984_963615763337907_386011816725818970_n.webp" alt="Kazán bekötés és csőszerelés" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.12s">
+        <img src="k%C3%A9pek/708134573_1224220399645587_5410294520444085498_n.webp" alt="Új kondenzációs kazán a falon" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.18s">
+        <img src="k%C3%A9pek/708299957_1041331691655733_4562790263212162873_n.webp" alt="Fűtési rendszer felújítás közben" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.24s">
+        <img src="k%C3%A9pek/708304113_1354565203392678_3170359402837390392_n.webp" alt="Kazáncsere és kéménybekötés" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.30s">
+        <img src="k%C3%A9pek/708865694_1010758681499236_3829306001970551938_n.webp" alt="Gázkazán szerviz és karbantartás" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.36s">
+        <img src="k%C3%A9pek/708876815_980802154355996_844945269867719164_n.webp" alt="Kazán hibakeresés és diagnosztika" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.42s">
+        <img src="k%C3%A9pek/708937665_1147167984261941_1263930095550568693_n.webp" alt="Kéménybélelés és égéstermék-elvezetés" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="gallery-tile reveal" role="listitem" tabindex="0" style="transition-delay:0.48s">
+        <img src="k%C3%A9pek/709165748_2733256427042606_1419274681728900376_n.webp" alt="Befejezett, üzembe helyezett fűtési rendszer" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+
+    <p class="gallery-footnote reveal">
+      Hasonló munkára van szüksége? <a href="tel:+36302605756">Hívjon: +36 30 260 57 56</a>
+    </p>
 
   </div>
 </section>

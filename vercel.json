@@ -5,8 +5,10 @@
     { "src": "*.jpg", "use": "@vercel/static" },
     { "src": "*.jpeg", "use": "@vercel/static" },
     { "src": "*.png", "use": "@vercel/static" },
+    { "src": "*.webp", "use": "@vercel/static" },
     { "src": "*.svg", "use": "@vercel/static" },
-    { "src": "*.ico", "use": "@vercel/static" }
+    { "src": "*.ico", "use": "@vercel/static" },
+    { "src": "képek/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/$1" }
