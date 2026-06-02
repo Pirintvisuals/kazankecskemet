@@ -463,7 +463,8 @@
 
     /* Right side: boiler diagnostic panel */
     .panel-wrap {
-      position: relative; z-index: 2; display: flex; justify-content: center;
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
       opacity: 0; transform: translateY(22px);
       animation: heroIn 0.9s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
     }
@@ -484,7 +485,7 @@
       background: #22C55E; box-shadow: 0 0 8px #22C55E;
     }
     .screen {
-      background: #0B1220; border-radius: 14px; padding: 30px 24px; text-align: center;
+      background: #0B1220; border-radius: 14px; padding: 26px 24px; text-align: center;
       font-family: var(--font-head); position: relative; overflow: hidden;
       box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
     }
@@ -492,26 +493,64 @@
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 4px);
     }
-    .scr-icon { height: 54px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
-    .scr-state {
-      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; margin-bottom: 10px; transition: color 0.4s;
+    .scr-icon { height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    /* Plain-language status is the dominant text; the code is a small chip */
+    .scr-main { font-size: 1.55rem; font-weight: 800; line-height: 1.2; transition: color 0.4s; }
+    .scr-code {
+      display: inline-block; margin-top: 12px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      padding: 5px 13px; border-radius: 100px;
+      background: rgba(255,255,255,0.06); color: #94A3B8;
+      transition: color 0.4s, background 0.4s;
     }
-    .scr-main { font-size: 3.2rem; font-weight: 800; letter-spacing: 0.04em; line-height: 1; transition: color 0.4s; }
-    .screen.err .scr-state { color: #FCA5A5; }
-    .screen.err .scr-main { color: #F87171; animation: scrFlicker 1s steps(2) infinite; }
-    .screen.ok .scr-state { color: #86EFAC; }
-    .screen.ok .scr-main { color: #22C55E; }
-    @keyframes scrFlicker { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
-    .panel-progress { height: 6px; border-radius: 6px; background: #E2E8F0; margin-top: 14px; overflow: hidden; }
-    .panel-progress > i {
-      display: block; height: 100%; width: 0;
-      background: linear-gradient(90deg, var(--blue), #22C55E); transition: width 0.9s ease;
+    .screen.err .scr-main { color: #FCA5A5; }
+    .screen.work .scr-main { color: #FBBF24; }
+    .screen.ok  .scr-main { color: #4ADE80; }
+    .screen.err  .scr-code { color: #FCA5A5; background: rgba(248,113,113,0.14); }
+    .screen.work .scr-code { color: #FCD34D; background: rgba(251,191,36,0.14); }
+    .screen.ok   .scr-code { color: #86EFAC; background: rgba(34,197,94,0.14); }
+
+    /* Always-visible labeled step rail: Hiba -> Javítás -> Kész */
+    .panel-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      margin-top: 22px;
     }
-    .panel-foot {
-      display: flex; justify-content: space-between; margin-top: 16px;
-      font-size: 0.78rem; color: #64748B; font-weight: 600;
+    .pstep {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; gap: 9px;
     }
+    .pstep:not(:first-child)::before {
+      content: ''; position: absolute; top: 15px; left: -50%; right: 50%; height: 2px;
+      background: #E2E8F0; z-index: 0; transition: background 0.45s;
+    }
+    .pstep-dot {
+      position: relative; z-index: 1;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-weight: 800; font-size: 0.85rem;
+      background: #fff; color: #94A3B8; border: 2px solid #E2E8F0;
+      transition: background 0.45s, border-color 0.45s, color 0.45s, box-shadow 0.45s;
+    }
+    .pstep-label {
+      font-size: 0.72rem; font-weight: 700; color: #94A3B8;
+      text-align: center; transition: color 0.45s;
+    }
+    .pstep.is-active .pstep-dot {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      box-shadow: 0 0 0 4px rgba(249,115,22,0.18);
+    }
+    .pstep.is-active .pstep-label { color: var(--navy); }
+    .pstep.is-active::before { background: var(--accent); }
+    .pstep.is-done .pstep-dot { background: #22C55E; border-color: #22C55E; color: #fff; }
+    .pstep.is-done .pstep-label { color: #16A34A; }
+    .pstep.is-done::before { background: #22C55E; }
+
+    /* Caption that frames what the panel is */
+    .panel-caption {
+      margin-top: 18px; max-width: 320px; text-align: center;
+      font-size: 0.82rem; line-height: 1.5; color: rgba(255,255,255,0.66);
+    }
+    .panel-caption strong { color: rgba(255,255,255,0.92); font-weight: 700; }
 
     @media (max-width: 900px) {
       #hero {
@@ -1447,19 +1486,35 @@
   <div class="panel-wrap" aria-hidden="true">
     <div class="panel">
       <div class="panel-top">
-        <span class="panel-brand"><span class="panel-led"></span> Kazán állapot</span>
-        <span>Diagnosztika</span>
+        <span class="panel-brand"><span class="panel-led"></span> Kazán diagnosztika</span>
+        <span>Élő</span>
       </div>
       <div class="screen err" id="hero-screen">
         <div class="scr-icon" id="hero-scr-icon">
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <div class="scr-state" id="hero-scr-state">Hibakód</div>
-        <div class="scr-main" id="hero-scr-main">E133</div>
+        <div class="scr-main" id="hero-scr-main">Gyújtási hiba</div>
+        <div class="scr-code" id="hero-scr-code">Hibakód: E133</div>
       </div>
-      <div class="panel-progress"><i id="hero-bar"></i></div>
-      <div class="panel-foot"><span id="hero-foot-l">Hiba észlelve</span><span id="hero-foot-r">Gyújtás hiba</span></div>
+      <div class="panel-steps">
+        <div class="pstep is-active" id="hero-step-1">
+          <span class="pstep-dot">1</span>
+          <span class="pstep-label">Hiba</span>
+        </div>
+        <div class="pstep" id="hero-step-2">
+          <span class="pstep-dot">2</span>
+          <span class="pstep-label">Javítás</span>
+        </div>
+        <div class="pstep" id="hero-step-3">
+          <span class="pstep-dot">3</span>
+          <span class="pstep-label">Kész</span>
+        </div>
+      </div>
     </div>
+    <p class="panel-caption">
+      <strong>Így dolgozunk:</strong> a kazán hibakódját sokszor már telefonon megfejtjük,
+      majd a helyszínen helyrehozzuk.
+    </p>
   </div>
 
 </section>
@@ -2544,41 +2599,63 @@
 <!-- ═══ HERO DIAGNOSTIC PANEL ════════════════════════════════ -->
 <script>
   (function () {
-    const screen = document.getElementById('hero-screen');
+    const screen  = document.getElementById('hero-screen');
     if (!screen) return;
-    const scrIcon  = document.getElementById('hero-scr-icon');
-    const scrState = document.getElementById('hero-scr-state');
-    const scrMain  = document.getElementById('hero-scr-main');
-    const bar      = document.getElementById('hero-bar');
-    const footL    = document.getElementById('hero-foot-l');
-    const footR    = document.getElementById('hero-foot-r');
+    const scrIcon = document.getElementById('hero-scr-icon');
+    const scrMain = document.getElementById('hero-scr-main');
+    const scrCode = document.getElementById('hero-scr-code');
+    const steps   = [
+      document.getElementById('hero-step-1'),
+      document.getElementById('hero-step-2'),
+      document.getElementById('hero-step-3')
+    ];
 
-    const errSvg   = '<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
-    const checkSvg = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    const warnSvg  = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+    const wrenchSvg= '<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5 2.5-2.5z"/></svg>';
+    const checkSvg = '<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
-    // Respect reduced-motion: show the resolved "OK" state, no looping.
+    // phase: 0 = fault, 1 = repairing, 2 = fixed
+    function setPhase(phase) {
+      if (phase === 0) {
+        screen.className = 'screen err';
+        scrIcon.innerHTML = warnSvg;
+        scrMain.textContent = 'Gyújtási hiba';
+        scrCode.textContent = 'Hibakód: E133';
+        setStep([true, false, false], 0);
+      } else if (phase === 1) {
+        screen.className = 'screen work';
+        scrIcon.innerHTML = wrenchSvg;
+        scrMain.textContent = 'Javítás folyamatban';
+        scrCode.textContent = 'E133 elhárítása';
+        setStep([false, true, false], 1);
+      } else {
+        screen.className = 'screen ok';
+        scrIcon.innerHTML = checkSvg;
+        scrMain.textContent = 'Üzemkész';
+        scrCode.textContent = 'Nincs hiba';
+        setStep([false, false, true], 2);
+      }
+    }
+    // mark steps before the active one as done, the active one as active
+    function setStep(activeFlags, activeIdx) {
+      steps.forEach((el, i) => {
+        if (!el) return;
+        el.classList.toggle('is-active', i === activeIdx);
+        el.classList.toggle('is-done', i < activeIdx);
+      });
+    }
+
+    // Respect reduced-motion: show the resolved state, no looping.
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      screen.className = 'screen ok';
-      scrIcon.innerHTML = checkSvg;
-      scrState.textContent = 'Készülék'; scrMain.textContent = 'OK';
-      footL.textContent = 'Megjavítva'; footR.textContent = 'Üzemkész';
-      bar.style.width = '100%';
+      setPhase(2);
       return;
     }
 
     function loop() {
-      // Fault phase
-      screen.className = 'screen err'; scrIcon.innerHTML = errSvg;
-      scrState.textContent = 'Hibakód'; scrMain.textContent = 'E133';
-      footL.textContent = 'Hiba észlelve'; footR.textContent = 'Gyújtás hiba';
-      bar.style.width = '0';
-      setTimeout(() => { bar.style.width = '100%'; footL.textContent = 'Javítás folyamatban'; }, 1600);
-      setTimeout(() => {
-        screen.className = 'screen ok'; scrIcon.innerHTML = checkSvg;
-        scrState.textContent = 'Készülék'; scrMain.textContent = 'OK';
-        footL.textContent = 'Megjavítva'; footR.textContent = 'Üzemkész';
-      }, 2700);
-      setTimeout(loop, 5200);
+      setPhase(0);
+      setTimeout(() => setPhase(1), 1900);
+      setTimeout(() => setPhase(2), 3600);
+      setTimeout(loop, 6000);
     }
     loop();
   })();
