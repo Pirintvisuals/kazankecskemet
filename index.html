@@ -164,15 +164,22 @@
 
       <ul class="nav-links" role="list">
         <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
-        <li><a href="#gallery">Munkáim</a></li>
+        <li><a href="munkaim.html">Munkáim</a></li>
         <li><a href="rolam.html">Rólam</a></li>
         <li><a href="contact.html">Kapcsolat</a></li>
       </ul>
 
-      <a href="tel:+36302605756" class="nav-cta" aria-label="Hívjon most">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +36 30 260 57 56
-      </a>
+      <div class="nav-actions">
+        <a href="tel:+36302605756" class="nav-phone" aria-label="Hívjon most: +36 30 260 57 56">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +36 30 260 57 56
+        </a>
+        <button type="button" class="nav-cta js-open-quote" aria-label="Ingyenes árajánlat kérése a chat asszisztenstől">
+          <span class="nav-cta-dot" aria-hidden="true"></span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Ingyenes árajánlat
+        </button>
+      </div>
 
       <button class="nav-hamburger" aria-label="Menü" aria-expanded="false" onclick="toggleNav(this)">
         <span></span><span></span><span></span>
@@ -183,7 +190,7 @@
 
 <div id="mobile-nav" role="dialog" aria-label="Mobilmenü">
   <a href="szolgaltatasok.html" class="mobile-nav-link" onclick="closeNav()">Szolgáltatások</a>
-  <a href="#gallery" class="mobile-nav-link" onclick="closeNav()">Munkáim</a>
+  <a href="munkaim.html" class="mobile-nav-link" onclick="closeNav()">Munkáim</a>
   <a href="rolam.html" class="mobile-nav-link" onclick="closeNav()">Rólam</a>
   <a href="contact.html" class="mobile-nav-link" onclick="closeNav()">Kapcsolat</a>
   <a href="tel:+36302605756" class="btn-primary" style="margin-top:28px; justify-content:center;" onclick="closeNav()">
@@ -781,165 +788,53 @@
     <div class="gallery-header reveal">
       <div class="section-label">Munkáim</div>
       <h2 class="section-headline" id="gallery-headline">Valódi munkák – <span style="color:var(--blue)">nem stockfotók</span></h2>
-      <p class="section-sub">Friss kazánszerelések, cserék és karbantartások Kecskemét környékéről. Minden képen a saját kezű munkám látható – válasszon kategóriát, vagy kattintson a nagyításhoz.</p>
+      <p class="section-sub">Friss kazánszerelések, cserék és karbantartások Kecskemét környékéről – néhány a legutóbbi munkáimból. Minden képen a saját kezű munkám látható.</p>
     </div>
 
-    <div class="gallery-filter reveal" role="tablist" aria-label="Munkák szűrése kategória szerint">
-      <button class="gallery-chip is-active" type="button" role="tab" aria-selected="true" data-filter="all">Összes <span class="gallery-chip-n"></span></button>
-      <button class="gallery-chip" type="button" role="tab" aria-selected="false" data-filter="kazancsere">Kazáncsere <span class="gallery-chip-n"></span></button>
-      <button class="gallery-chip" type="button" role="tab" aria-selected="false" data-filter="beuzemeles">Beüzemelés <span class="gallery-chip-n"></span></button>
-      <button class="gallery-chip" type="button" role="tab" aria-selected="false" data-filter="karbantartas">Karbantartás <span class="gallery-chip-n"></span></button>
-      <button class="gallery-chip" type="button" role="tab" aria-selected="false" data-filter="futes">Fűtésszerelés <span class="gallery-chip-n"></span></button>
-      <button class="gallery-chip" type="button" role="tab" aria-selected="false" data-filter="kemeny">Kéménybélelés <span class="gallery-chip-n"></span></button>
-    </div>
+    <div class="gallery-grid">
 
-    <div class="gallery-grid" role="list">
-
-      <figure class="gallery-tile reveal" data-cat="beuzemeles" role="listitem" tabindex="0" aria-label="Kazán beüzemelés családi házban – nagyítás">
-        <img src="k%C3%A9pek/707667883_1000358642393394_1460888495025001767_n.webp" alt="Kazán beüzemelés családi házban" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Beüzemelés</span><div class="gallery-cap-title">Kazán beüzemelés családi házban</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="futes" role="listitem" tabindex="0" aria-label="Kazán bekötés és csőszerelés – nagyítás">
-        <img src="k%C3%A9pek/707762984_963615763337907_386011816725818970_n.webp" alt="Kazán bekötés és csőszerelés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Fűtésszerelés</span><div class="gallery-cap-title">Bekötés és csőszerelés</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kazancsere" role="listitem" tabindex="0" aria-label="Új kondenzációs kazán a falon – nagyítás">
+      <a class="gallery-tile is-featured reveal" href="munkaim.html" aria-label="Kazáncsere – összes munkám megtekintése">
         <img src="k%C3%A9pek/708134573_1224220399645587_5410294520444085498_n.webp" alt="Új kondenzációs kazán a falon" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Új kondenzációs kazán</div></figcaption>
-      </figure>
+        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Új kondenzációs kazán</div></div>
+      </a>
 
-      <figure class="gallery-tile reveal" data-cat="futes karbantartas" role="listitem" tabindex="0" aria-label="Fűtési rendszer felújítás közben – nagyítás">
-        <img src="k%C3%A9pek/708299957_1041331691655733_4562790263212162873_n.webp" alt="Fűtési rendszer felújítás közben" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Felújítás</span><div class="gallery-cap-title">Fűtési rendszer felújítás</div></figcaption>
-      </figure>
+      <a class="gallery-tile reveal" href="munkaim.html" aria-label="Kazán beüzemelés – összes munkám megtekintése">
+        <img src="k%C3%A9pek/707667883_1000358642393394_1460888495025001767_n.webp" alt="Kazán beüzemelés családi házban" loading="lazy" decoding="async" />
+        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="gallery-cap"><span class="gallery-cap-tag">Beüzemelés</span><div class="gallery-cap-title">Kazán beüzemelés</div></div>
+      </a>
 
-      <figure class="gallery-tile reveal" data-cat="kazancsere kemeny" role="listitem" tabindex="0" aria-label="Kazáncsere és kéménybekötés – nagyítás">
-        <img src="k%C3%A9pek/708304113_1354565203392678_3170359402837390392_n.webp" alt="Kazáncsere és kéménybekötés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Kazáncsere és kéménybekötés</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="karbantartas" role="listitem" tabindex="0" aria-label="Gázkazán szerviz és karbantartás – nagyítás">
+      <a class="gallery-tile reveal" href="munkaim.html" aria-label="Gázkazán szerviz – összes munkám megtekintése">
         <img src="k%C3%A9pek/708865694_1010758681499236_3829306001970551938_n.webp" alt="Gázkazán szerviz és karbantartás" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Szerviz</span><div class="gallery-cap-title">Gázkazán szerviz és karbantartás</div></figcaption>
-      </figure>
+        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="gallery-cap"><span class="gallery-cap-tag">Szerviz</span><div class="gallery-cap-title">Gázkazán szerviz</div></div>
+      </a>
 
-      <figure class="gallery-tile reveal" data-cat="karbantartas" role="listitem" tabindex="0" aria-label="Kazán hibakeresés és diagnosztika – nagyítás">
-        <img src="k%C3%A9pek/708876815_980802154355996_844945269867719164_n.webp" alt="Kazán hibakeresés és diagnosztika" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Diagnosztika</span><div class="gallery-cap-title">Hibakeresés és diagnosztika</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kemeny" role="listitem" tabindex="0" aria-label="Kéménybélelés és égéstermék-elvezetés – nagyítás">
-        <img src="k%C3%A9pek/708937665_1147167984261941_1263930095550568693_n.webp" alt="Kéménybélelés és égéstermék-elvezetés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kéménybélelés</span><div class="gallery-cap-title">Kéménybélelés és elvezetés</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kazancsere" role="listitem" tabindex="0" aria-label="Fali kondenzációs kazán csere – nagyítás">
-        <img src="k%C3%A9pek/707125326_918619997869657_1747506858485559298_n.webp" alt="Fali kondenzációs kazán csere" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Fali kondenzációs kazán csere</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="beuzemeles" role="listitem" tabindex="0" aria-label="Új gázkazán beüzemelése – nagyítás">
-        <img src="k%C3%A9pek/707420684_1352835460072800_1841501831037842416_n.webp" alt="Új gázkazán beüzemelése" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Beüzemelés</span><div class="gallery-cap-title">Új gázkazán beüzemelése</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="futes" role="listitem" tabindex="0" aria-label="Radiátorcsere és bekötés – nagyítás">
-        <img src="k%C3%A9pek/707420684_981249194665501_7865748018828990854_n.webp" alt="Radiátorcsere és bekötés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Fűtésszerelés</span><div class="gallery-cap-title">Radiátorcsere és bekötés</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="karbantartas" role="listitem" tabindex="0" aria-label="Éves kazán karbantartás – nagyítás">
-        <img src="k%C3%A9pek/707445157_1589615896497672_6999197818411514873_n.webp" alt="Éves kazán karbantartás" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Karbantartás</span><div class="gallery-cap-title">Éves kazán karbantartás</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kazancsere" role="listitem" tabindex="0" aria-label="Régi kazán cseréje korszerűre – nagyítás">
-        <img src="k%C3%A9pek/709165748_2733256427042606_1419274681728900376_n.webp" alt="Régi kazán cseréje korszerűre" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Régi kazán cseréje korszerűre</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kemeny kazancsere" role="listitem" tabindex="0" aria-label="Kéménybélelés kazáncseréhez – nagyítás">
-        <img src="k%C3%A9pek/709699200_845407851487605_4922152442905902910_n.webp" alt="Kéménybélelés kazáncseréhez" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kéménybélelés</span><div class="gallery-cap-title">Kéménybélelés kazáncseréhez</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="karbantartas" role="listitem" tabindex="0" aria-label="Hőcserélő tisztítás – nagyítás">
-        <img src="k%C3%A9pek/709762381_1755585772299869_2010306322728056826_n.webp" alt="Hőcserélő tisztítás" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Karbantartás</span><div class="gallery-cap-title">Hőcserélő tisztítás</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="futes" role="listitem" tabindex="0" aria-label="Padlófűtés osztó-gyűjtő szerelés – nagyítás">
+      <a class="gallery-tile reveal" href="munkaim.html" aria-label="Fűtésszerelés – összes munkám megtekintése">
         <img src="k%C3%A9pek/709840697_2467390073762802_2080528073030313049_n.webp" alt="Padlófűtés osztó-gyűjtő szerelés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Fűtésszerelés</span><div class="gallery-cap-title">Padlófűtés osztó-gyűjtő</div></figcaption>
-      </figure>
+        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="gallery-cap"><span class="gallery-cap-tag">Fűtésszerelés</span><div class="gallery-cap-title">Padlófűtés szerelés</div></div>
+      </a>
 
-      <figure class="gallery-tile reveal" data-cat="beuzemeles" role="listitem" tabindex="0" aria-label="Kombi kazán beüzemelés – nagyítás">
-        <img src="k%C3%A9pek/710350941_4444912195652580_3692931298806003095_n.webp" alt="Kombi kazán beüzemelés" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Beüzemelés</span><div class="gallery-cap-title">Kombi kazán beüzemelés</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kazancsere" role="listitem" tabindex="0" aria-label="Kondenzációs kazán csere lakásban – nagyítás">
-        <img src="k%C3%A9pek/708134573_1224220399645587_5410294520444085498_n.webp" alt="Kondenzációs kazán csere lakásban" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kazáncsere</span><div class="gallery-cap-title">Kondenzációs kazán csere lakásban</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="karbantartas" role="listitem" tabindex="0" aria-label="Gázkészülék felülvizsgálat – nagyítás">
-        <img src="k%C3%A9pek/708865694_1010758681499236_3829306001970551938_n.webp" alt="Gázkészülék felülvizsgálat" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Szerviz</span><div class="gallery-cap-title">Gázkészülék felülvizsgálat</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="kemeny" role="listitem" tabindex="0" aria-label="Turbós kémény kiépítése – nagyítás">
-        <img src="k%C3%A9pek/708937665_1147167984261941_1263930095550568693_n.webp" alt="Turbós kémény kiépítése" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Kéménybélelés</span><div class="gallery-cap-title">Turbós kémény kiépítése</div></figcaption>
-      </figure>
-
-      <figure class="gallery-tile reveal" data-cat="futes beuzemeles" role="listitem" tabindex="0" aria-label="Fűtéskorszerűsítés panellakásban – nagyítás">
-        <img src="k%C3%A9pek/708299957_1041331691655733_4562790263212162873_n.webp" alt="Fűtéskorszerűsítés panellakásban" loading="lazy" decoding="async" />
-        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div>
-        <figcaption class="gallery-cap"><span class="gallery-cap-tag">Fűtésszerelés</span><div class="gallery-cap-title">Fűtéskorszerűsítés panellakásban</div></figcaption>
-      </figure>
+      <a class="gallery-tile reveal" href="munkaim.html" aria-label="Kéménybélelés – összes munkám megtekintése">
+        <img src="k%C3%A9pek/708937665_1147167984261941_1263930095550568693_n.webp" alt="Kéménybélelés és égéstermék-elvezetés" loading="lazy" decoding="async" />
+        <div class="gallery-tile-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="gallery-cap"><span class="gallery-cap-tag">Kéménybélelés</span><div class="gallery-cap-title">Kéménybélelés</div></div>
+      </a>
 
     </div>
 
-    <p class="gallery-empty" hidden>Ebben a kategóriában jelenleg nincs kép.</p>
-
-    <p class="gallery-footnote reveal">
-      Hasonló munkára van szüksége? <a href="tel:+36302605756">Hívjon: +36 30 260 57 56</a>
+    <p class="gallery-footnote reveal" style="margin-top:40px;">
+      <a href="munkaim.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+        Összes munkám megtekintése
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </p>
 
   </div>
 </section>
 
-<!-- Lightbox -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Kép nagyítva">
-  <button class="lb-btn lb-close" aria-label="Bezárás"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  <button class="lb-btn lb-prev" aria-label="Előző kép"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-  <img class="lb-img" src="" alt="" />
-  <button class="lb-btn lb-next" aria-label="Következő kép"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
-  <div class="lb-cap"></div>
-</div>
 
 <!-- ═══ FAQ ══════════════════════════════════════════════════ -->
 <section id="faq" aria-labelledby="faq-headline">

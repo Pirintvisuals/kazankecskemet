@@ -195,16 +195,39 @@
     .nav-links a:hover { color: #fff; }
     .nav-links a:hover::after { transform: scaleX(1); }
 
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .nav-phone {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-head); font-size: 0.9rem; font-weight: 600;
+      color: rgba(255,255,255,0.9); white-space: nowrap;
+      transition: color 0.2s;
+      animation: navLinkIn 0.5s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .nav-phone svg { color: #7DD3FC; flex-shrink: 0; }
+    .nav-phone:hover { color: #fff; }
+
     .nav-cta {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #fff;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff; border: none;
       font-family: var(--font-head); font-size: 0.875rem; font-weight: 600;
-      padding: 10px 22px; border-radius: var(--radius-sm);
+      padding: 10px 20px; border-radius: var(--radius-sm);
       transition: background 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
       cursor: pointer;
-      animation: navLinkIn 0.5s 0.42s cubic-bezier(0.22,1,0.36,1) both;
+      animation: navLinkIn 0.5s 0.46s cubic-bezier(0.22,1,0.36,1) both;
     }
     .nav-cta:hover { background: var(--accent-dark); transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-accent); }
+    .nav-cta-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4ADE80; flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(74,222,128,0.7);
+      animation: ctaDotPulse 2s infinite;
+    }
+    @keyframes ctaDotPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.65); }
+      70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+    @media (prefers-reduced-motion: reduce) { .nav-cta-dot { animation: none; } }
 
     /* Mobile slide-down menu panel (opened via JS → display:flex) */
     @keyframes mobileNavIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -1292,13 +1315,17 @@
 
     /* ── MOBILE RESPONSIVE REFINEMENTS ────────────────────────── */
     /* Nav: swap desktop links for the hamburger menu */
+    /* Tablet/narrow desktop: drop the phone number text, keep the chat CTA */
+    @media (max-width: 1080px) {
+      .nav-phone { display: none; }
+    }
     @media (max-width: 980px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
     }
     /* On phones the floating call button takes over for the nav CTA */
     @media (max-width: 768px) {
-      .nav-cta { display: none; }
+      .nav-actions { display: none; }
     }
 
     /* Services grid: 3 → 2 → 1 columns */
@@ -1348,7 +1375,20 @@
       width: 540px; height: 540px; pointer-events: none;
       background: radial-gradient(circle, var(--blue-glow), transparent 70%);
     }
-    .svc-hero .container { position: relative; z-index: 1; }
+    .svc-hero .container { position: relative; z-index: 2; }
+    .svc-hero-photo {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 54%; height: 100%; object-fit: cover; z-index: 0;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.9) 46%, #000 100%);
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.9) 46%, #000 100%);
+    }
+    .svc-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(90deg, var(--navy) 30%, rgba(15,23,42,0.55) 54%, rgba(15,23,42,0.06) 74%, transparent 100%);
+    }
+    @media (max-width: 880px) {
+      .svc-hero-photo, .svc-hero::before { display: none; }
+    }
     .svc-breadcrumb { font-size: 0.85rem; margin-bottom: 22px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .svc-breadcrumb a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
     .svc-breadcrumb a:hover { color: #fff; }
@@ -1415,6 +1455,37 @@
     .svc-rel-card h3 { font-family: var(--font-head); font-size: 1.05rem; color: var(--navy); }
     .svc-rel-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
     .svc-rel-link { color: var(--blue); font-weight: 600; font-size: 0.9rem; display: inline-flex; gap: 6px; align-items: center; }
+
+    /* ── Why-me trust band (szolgaltatasok.html) ── */
+    .svc-why { position: relative; padding: 72px 0; background: var(--off-white); overflow: hidden; }
+    .svc-why::before { content: ""; position: absolute; top: -28%; right: -8%; width: 440px; height: 440px; background: radial-gradient(circle, var(--blue-glow), transparent 70%); opacity: 0.5; pointer-events: none; }
+    .svc-why .container { position: relative; z-index: 1; }
+    .svc-why-eyebrow { display: block; text-align: center; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .svc-why h2 { text-align: center; font-family: var(--font-head); font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+    .svc-why-lead { text-align: center; max-width: 620px; margin: 0 auto 38px; color: var(--text-mid); line-height: 1.7; }
+
+    .svc-why-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 760px; margin: 0 auto 42px; padding: 26px 18px; background: linear-gradient(160deg, var(--navy), var(--navy-mid)); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .svc-why-stat { text-align: center; padding: 4px; position: relative; }
+    .svc-why-stat + .svc-why-stat::before { content: ""; position: absolute; left: -9px; top: 50%; transform: translateY(-50%); width: 1px; height: 42px; background: rgba(255,255,255,0.12); }
+    .svc-why-stat-num { display: block; font-family: var(--font-head); font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 800; line-height: 1; color: #fff; }
+    .svc-why-stat-num span { color: var(--accent); font-size: 0.55em; margin-left: 1px; }
+    .svc-why-stat-label { display: block; margin-top: 8px; font-size: 0.8rem; color: rgba(255,255,255,0.66); line-height: 1.35; }
+
+    .svc-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .svc-why-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px 22px; box-shadow: var(--shadow-sm); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+    .svc-why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--blue); }
+    .svc-why-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; margin-bottom: 16px; color: #fff; background: linear-gradient(135deg, var(--blue), var(--blue-dark)); box-shadow: 0 6px 18px rgba(3,105,161,0.30); }
+    .svc-why-card:nth-child(2) .svc-why-icon { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); box-shadow: 0 6px 18px rgba(249,115,22,0.30); }
+    .svc-why-card h3 { font-family: var(--font-head); font-size: 1.08rem; color: var(--navy); margin-bottom: 8px; }
+    .svc-why-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    @media (max-width: 760px) {
+      .svc-why-stats { grid-template-columns: repeat(2, 1fr); gap: 26px 12px; }
+      .svc-why-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 460px) {
+      .svc-why-grid { grid-template-columns: 1fr; }
+    }
 
     .svc-ctaband { background: linear-gradient(160deg, var(--navy), var(--navy-mid)); color: #fff; padding: 64px 0; text-align: center; }
     .svc-ctaband h2 { font-family: var(--font-head); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: 14px; }
