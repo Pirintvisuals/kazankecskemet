@@ -1,0 +1,12 @@
+# Local dev tooling / agent artifacts — not part of the site deliverable
+.claude/
+.agents/
+skills-lock.json
+
+# React/shadcn scaffolding unused by this vanilla HTML site
+components/
+lib/
+
+# Local experiments / notes
+hero-concepts/
+Claude.md
