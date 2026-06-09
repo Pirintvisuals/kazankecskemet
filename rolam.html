@@ -333,16 +333,16 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
   /* Hero parallax — photo drifts slower than the page for depth.
-     Disabled for reduced-motion users and on mobile (photo is hidden < 880px). */
+     Intentionally runs regardless of prefers-reduced-motion (owner-requested
+     signature effect); skipped on mobile where the photo is hidden < 880px. */
   (function () {
     const photo = document.querySelector('.svc-hero-photo--parallax');
     if (!photo) return;
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     const hero = photo.closest('.svc-hero');
     let ticking = false;
     function update() {
       ticking = false;
-      if ((reduce && reduce.matches) || window.innerWidth <= 880) {
+      if (window.innerWidth <= 880) {
         photo.style.removeProperty('--parallax-y');
         return;
       }

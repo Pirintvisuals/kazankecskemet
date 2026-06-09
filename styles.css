@@ -1426,9 +1426,6 @@
     @media (max-width: 880px) {
       .svc-hero-photo, .svc-hero::before { display: none; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .svc-hero-photo--parallax { transform: none; }
-    }
     .svc-breadcrumb { font-size: 0.85rem; margin-bottom: 22px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .svc-breadcrumb a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
     .svc-breadcrumb a:hover { color: #fff; }
