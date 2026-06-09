@@ -97,7 +97,7 @@
 
 <!-- ═══ HERO ══════════════════════════════════════════════════ -->
 <header class="svc-hero">
-  <img class="svc-hero-photo" src="k%C3%A9pek/708876815_980802154355996_844945269867719164_n.webp" alt="Polyák Zoltán kazánszerelő munka közben Kecskeméten" loading="eager" decoding="async" />
+  <img class="svc-hero-photo svc-hero-photo--parallax" src="k%C3%A9pek/708876815_980802154355996_844945269867719164_n.webp" alt="Polyák Zoltán kazánszerelő munka közben Kecskeméten" loading="eager" decoding="async" />
   <div class="container">
     <nav class="svc-breadcrumb" aria-label="Morzsamenü">
       <a href="index.html">Főoldal</a><span class="sep">/</span>
@@ -331,6 +331,32 @@
   }
   window.addEventListener('resize', () => { if (window.innerWidth > 980) closeNav(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  /* Hero parallax — photo drifts slower than the page for depth.
+     Disabled for reduced-motion users and on mobile (photo is hidden < 880px). */
+  (function () {
+    const photo = document.querySelector('.svc-hero-photo--parallax');
+    if (!photo) return;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    const hero = photo.closest('.svc-hero');
+    let ticking = false;
+    function update() {
+      ticking = false;
+      if ((reduce && reduce.matches) || window.innerWidth <= 880) {
+        photo.style.removeProperty('--parallax-y');
+        return;
+      }
+      const rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return; // off-screen
+      photo.style.setProperty('--parallax-y', (window.scrollY * 0.18).toFixed(1) + 'px');
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
 </script>
 
 <!-- ÁRAJÁNLÓ CHAT WIDGET (Kazán Kecskemét) -->

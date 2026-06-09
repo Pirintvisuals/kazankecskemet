@@ -1416,8 +1416,18 @@
       content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background: linear-gradient(90deg, var(--navy) 30%, rgba(15,23,42,0.55) 54%, rgba(15,23,42,0.06) 74%, transparent 100%);
     }
+    /* Parallax hero photo (rolam.html) — JS sets --parallax-y on scroll.
+       Extra height + negative top give overscan so movement never shows an edge. */
+    .svc-hero-photo--parallax {
+      top: -22%; bottom: auto; height: 144%;
+      transform: translate3d(0, var(--parallax-y, 0px), 0);
+      will-change: transform;
+    }
     @media (max-width: 880px) {
       .svc-hero-photo, .svc-hero::before { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .svc-hero-photo--parallax { transform: none; }
     }
     .svc-breadcrumb { font-size: 0.85rem; margin-bottom: 22px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .svc-breadcrumb a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
