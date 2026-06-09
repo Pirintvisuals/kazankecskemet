@@ -348,7 +348,7 @@
       }
       const rect = hero.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return; // off-screen
-      photo.style.setProperty('--parallax-y', (window.scrollY * 0.18).toFixed(1) + 'px');
+      photo.style.setProperty('--parallax-y', (window.scrollY * 0.35).toFixed(1) + 'px');
     }
     function onScroll() {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }

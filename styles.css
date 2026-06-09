@@ -1419,7 +1419,7 @@
     /* Parallax hero photo (rolam.html) — JS sets --parallax-y on scroll.
        Extra height + negative top give overscan so movement never shows an edge. */
     .svc-hero-photo--parallax {
-      top: -22%; bottom: auto; height: 144%;
+      top: -38%; bottom: auto; height: 176%;
       transform: translate3d(0, var(--parallax-y, 0px), 0);
       will-change: transform;
     }
