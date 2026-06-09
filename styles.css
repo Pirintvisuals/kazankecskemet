@@ -1021,8 +1021,8 @@
     .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 4; }
     .ba-caption { text-align: center; margin-top: 20px; font-size: 0.92rem; color: var(--text-muted); }
     .gallery-footnote { text-align: center; margin-top: 42px; font-size: 0.98rem; color: var(--text-muted); }
-    .gallery-footnote a { color: var(--blue); font-weight: 700; }
-    .gallery-footnote a:hover { text-decoration: underline; }
+    .gallery-footnote a:not(.btn-primary):not(.btn-outline) { color: var(--blue); font-weight: 700; }
+    .gallery-footnote a:not(.btn-primary):not(.btn-outline):hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
       .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 12px; }
