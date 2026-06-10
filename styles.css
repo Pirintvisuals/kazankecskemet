@@ -436,6 +436,27 @@
       .hero-cta-row { justify-content: center; }
     }
 
+    /* Phones: calmer headline, even rhythm, clean full-width CTAs */
+    @media (max-width: 600px) {
+      #hero {
+        gap: 30px;
+        padding: calc(var(--nav-h) + 26px) 22px 46px;
+      }
+      .hero-left, .hero-main { width: 100%; }
+      .hero-h1 { font-size: 2.25rem; line-height: 1.12; }
+      .hero-accent-line { margin: 18px auto; }
+      .hero-sub-text {
+        font-size: 1rem; line-height: 1.7;
+        max-width: 420px; margin-bottom: 28px;
+      }
+      .hero-cta-row {
+        flex-direction: column; align-items: stretch; flex-wrap: nowrap;
+        width: 100%; max-width: 360px; margin: 0 auto; gap: 12px;
+      }
+      .hero-btn { width: 100%; justify-content: center; padding: 16px 22px; }
+      .panel { width: 100%; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .hero-avail-dot { animation: none; }
       .panel-wrap { animation: none; opacity: 1; transform: none; }
@@ -1337,11 +1358,8 @@
     .mbar-call:active { background: rgba(255,255,255,0.22); transform: scale(0.98); }
     .mbar-quote { background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(249,115,22,0.45); }
     .mbar-quote:active { background: var(--accent-dark); transform: scale(0.98); }
-    @media (max-width: 768px) {
-      #float-call { display: flex; }
-      body { padding-bottom: 78px; }
-      .faq-chat-launcher { bottom: 90px !important; }
-    }
+    /* Mobile action bar removed — it overlapped the chat widget launcher.
+       #float-call stays display:none on every breakpoint. */
 
     /* ── MOBILE RESPONSIVE REFINEMENTS ────────────────────────── */
     /* Nav: swap desktop links for the hamburger menu */
