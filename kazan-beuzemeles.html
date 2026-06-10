@@ -361,6 +361,21 @@
   };
 </script>
 <script src="https://kecskemet-kazan-widget.vercel.app/widget.js" defer></script>
+<!-- Chat: nyiljon meg automatikusan az oldal megnyitasakor (munkamenetenkent egyszer) -->
+<script>
+  (function () {
+    if (window.matchMedia('(max-width: 980px)').matches) return; /* mobilon ne nyiljon ki, csak a buborek */
+    if (sessionStorage.getItem('kazanChatAutoOpened')) return;
+    var tries = 0, iv = setInterval(function () {
+      var launcher = document.querySelector('.faq-chat-launcher');
+      if (launcher) {
+        clearInterval(iv);
+        sessionStorage.setItem('kazanChatAutoOpened', '1');
+        launcher.click();
+      } else if (++tries > 60) { clearInterval(iv); }
+    }, 100);
+  })();
+</script>
 
 </body>
 </html>
