@@ -1235,6 +1235,16 @@
   /* Close the menu with Escape for keyboard users */
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
+  /* Teljes szolgáltatás-kártya kattintható: a kártyán belüli "Részletek" linket követi */
+  document.querySelectorAll('.service-card').forEach(card => {
+    const link = card.querySelector('a.service-link[href]');
+    if (!link) return;
+    card.addEventListener('click', e => {
+      if (e.target.closest('a, button')) return; /* valódi link/gomb maga kezeli a kattintást */
+      window.location.href = link.href;
+    });
+  });
+
   /* FAQ accordion */
   document.querySelectorAll('.faq-q-btn').forEach(btn => {
     btn.addEventListener('click', () => {

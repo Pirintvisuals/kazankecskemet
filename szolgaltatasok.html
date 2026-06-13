@@ -412,6 +412,16 @@
   }
   window.addEventListener('resize', () => { if (window.innerWidth > 980) closeNav(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  // Teljes szolgáltatás-kártya kattintható: a kártyán belüli "Részletek" linket követi
+  document.querySelectorAll('.service-card').forEach(card => {
+    const link = card.querySelector('a.service-link[href]');
+    if (!link) return;
+    card.addEventListener('click', e => {
+      if (e.target.closest('a, button')) return; // valódi link/gomb maga kezeli a kattintást
+      window.location.href = link.href;
+    });
+  });
 </script>
 
 <!-- ÁRAJÁNLÓ CHAT WIDGET (Kazán Kecskemét) -->
