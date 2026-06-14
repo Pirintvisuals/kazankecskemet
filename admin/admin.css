@@ -1,0 +1,121 @@
+/* Kazán Admin – back-office stílus (az oldal arculatát követi) */
+:root{
+  --navy:#0F172A; --blue:#1A56E8; --blue-dark:#1442b8; --accent:#F97316;
+  --gray:#f1f5f9; --gray2:#e2e8f0; --border:#e2e8f0; --text:#1e293b; --muted:#64748b;
+  --green:#16a34a; --red:#dc2626; --amber:#d97706;
+  --radius:12px; --shadow:0 1px 3px rgba(15,23,42,.08),0 8px 24px rgba(15,23,42,.06);
+  --font:'Open Sans',system-ui,sans-serif; --head:'Poppins',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--gray);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Topbar */
+.adm-top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.adm-top-inner{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:24px}
+.adm-brand{font-family:var(--head);font-weight:800;font-size:1.2rem;color:#fff}
+.adm-brand:hover{text-decoration:none}
+.adm-brand span{color:var(--accent)}
+.adm-nav{display:flex;gap:6px;flex:1}
+.adm-nav a{color:#cbd5e1;padding:8px 14px;border-radius:8px;font-weight:600;font-size:.92rem}
+.adm-nav a:hover{background:rgba(255,255,255,.08);color:#fff;text-decoration:none}
+.adm-nav a.active{background:var(--blue);color:#fff}
+.adm-user{display:flex;align-items:center;gap:14px;font-size:.9rem;color:#94a3b8}
+.adm-logout{color:#fff;background:rgba(255,255,255,.1);padding:7px 14px;border-radius:8px;font-weight:600}
+.adm-logout:hover{background:rgba(255,255,255,.2);text-decoration:none}
+
+.adm-main{max-width:1080px;margin:0 auto;padding:32px 20px 60px}
+.adm-foot{text-align:center;color:var(--muted);font-size:.82rem;padding:24px}
+
+/* Fejléc-sor */
+.adm-pagehead{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.adm-pagehead h1{font-family:var(--head);font-size:1.6rem;margin:0;color:var(--navy)}
+.adm-pagehead p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+
+/* Gombok */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:600;font-size:.92rem;
+  padding:11px 20px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:.15s;text-decoration:none}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-dark);color:#fff}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#ea580c;color:#fff}
+.btn-ghost{background:#fff;border-color:var(--border);color:var(--navy)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-danger{background:#fff;border-color:#fecaca;color:var(--red)}
+.btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-sm{padding:7px 13px;font-size:.85rem}
+
+/* Flash */
+.adm-flash{padding:13px 18px;border-radius:10px;margin-bottom:22px;font-weight:600;font-size:.92rem}
+.adm-flash-success{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
+.adm-flash-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+.adm-flash-info{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+
+/* Lista / tábla */
+.adm-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.adm-table{width:100%;border-collapse:collapse}
+.adm-table th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  padding:14px 18px;border-bottom:1px solid var(--border);background:#fafbfc}
+.adm-table td{padding:15px 18px;border-bottom:1px solid var(--gray);vertical-align:middle}
+.adm-table tr:last-child td{border-bottom:none}
+.adm-table tr:hover td{background:#fafbfc}
+.adm-row-title{font-weight:700;color:var(--navy);font-family:var(--head)}
+.adm-row-title a{color:var(--navy)}
+.adm-row-slug{font-size:.8rem;color:var(--muted);margin-top:2px}
+.adm-actions{display:flex;gap:8px;justify-content:flex-end}
+.adm-thumb{width:64px;height:44px;object-fit:cover;border-radius:7px;border:1px solid var(--border);background:var(--gray)}
+
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:700;padding:4px 11px;border-radius:999px}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%}
+.badge-published{background:#dcfce7;color:#166534}
+.badge-published::before{background:var(--green)}
+.badge-draft{background:#fef3c7;color:#92400e}
+.badge-draft::before{background:var(--amber)}
+
+/* Üres állapot */
+.adm-empty{text-align:center;padding:60px 24px;color:var(--muted)}
+.adm-empty h2{font-family:var(--head);color:var(--navy);margin:0 0 8px}
+
+/* Űrlap */
+.adm-form{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+@media(max-width:860px){.adm-form{grid-template-columns:1fr}}
+.adm-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.adm-panel + .adm-panel{margin-top:20px}
+.adm-panel h3{font-family:var(--head);font-size:1rem;margin:0 0 16px;color:var(--navy)}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-weight:600;font-size:.85rem;color:var(--navy);margin-bottom:7px}
+.field .hint{font-weight:400;color:var(--muted);font-size:.8rem}
+.field input[type=text],.field textarea{width:100%;padding:11px 13px;border:1px solid var(--gray2);border-radius:9px;
+  font-family:var(--font);font-size:.95rem;color:var(--text);background:#fff;transition:.15s}
+.field input[type=text]:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,232,.12)}
+.field textarea{resize:vertical;min-height:80px}
+.field-title input{font-size:1.15rem;font-weight:600;font-family:var(--head)}
+
+/* Státusz választó */
+.statuses{display:flex;gap:10px}
+.statuses label{flex:1;border:1px solid var(--gray2);border-radius:10px;padding:12px;cursor:pointer;text-align:center;
+  font-weight:600;font-size:.9rem;transition:.15s;margin:0}
+.statuses input{position:absolute;opacity:0}
+.statuses label:has(input:checked){border-color:var(--blue);background:#eff4ff;color:var(--blue)}
+
+/* Kiemelt kép */
+.feat-preview{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;border:1px solid var(--border);background:var(--gray);margin-bottom:12px;display:block}
+.feat-empty{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem}
+
+.form-bar{position:sticky;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:center;margin-top:22px;box-shadow:var(--shadow)}
+.form-bar .spacer{flex:1}
+
+/* Login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--navy)}
+.login-card{background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:40px;width:100%;max-width:400px}
+.login-card h1{font-family:var(--head);text-align:center;color:var(--navy);margin:0 0 6px;font-size:1.5rem}
+.login-card h1 span{color:var(--accent)}
+.login-card .sub{text-align:center;color:var(--muted);font-size:.88rem;margin:0 0 26px}
+.login-card .field input{width:100%}
+.login-card input[type=password]{width:100%;padding:11px 13px;border:1px solid var(--gray2);border-radius:9px;font-size:.95rem;font-family:var(--font)}
+.login-card input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,232,.12)}
+.login-card .btn{width:100%;justify-content:center;margin-top:6px}

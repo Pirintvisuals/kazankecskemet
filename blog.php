@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+define('APP', true);
+require_once __DIR__ . '/inc/bootstrap.php';
+
+$posts = posts_published();
+$featured = array_shift($posts); // legfrissebb
+$rest = $posts;
+
+function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
+?><!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
@@ -6,10 +15,10 @@
   <title>Blog – Kazán tippek és tanácsok | Kazán Szerviz Kecskemét</title>
   <meta name="description" content="Hasznos cikkek a kazánjáról: karbantartás, hibakódok, gázszámla-csökkentés és kazáncsere. Polyák Zoltán kazánszerelő és gázbiztonsági felülvizsgáló tanácsai Kecskemétről." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://kazanszervizkecskemet.hu/blog.html" />
+  <link rel="canonical" href="https://kazanszervizkecskemet.hu/blog.php" />
   <meta property="og:title" content="Blog – Kazán tippek és tanácsok | Kazán Szerviz Kecskemét" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kazanszervizkecskemet.hu/blog.html" />
+  <meta property="og:url" content="https://kazanszervizkecskemet.hu/blog.php" />
   <meta name="theme-color" content="#0F172A" />
   <link rel="icon" type="image/png" href="logo%20transparent.png" />
   <link rel="apple-touch-icon" href="logo%20transparent.png" />
@@ -23,7 +32,7 @@
   "@type": "Blog",
   "name": "Kazán Szerviz Kecskemét – Blog",
   "description": "Hasznos cikkek a kazánról: karbantartás, hibakódok, gázszámla-csökkentés és kazáncsere.",
-  "url": "https://kazanszervizkecskemet.hu/blog.html",
+  "url": "https://kazanszervizkecskemet.hu/blog.php",
   "publisher": {
     "@type": "LocalBusiness",
     "name": "Kazán Szerviz Kecskemét – Polyák Zoltán",
@@ -44,7 +53,7 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Főoldal", "item": "https://kazanszervizkecskemet.hu/" },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kazanszervizkecskemet.hu/blog.html" }
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kazanszervizkecskemet.hu/blog.php" }
   ]
 }
   </script>
@@ -68,7 +77,7 @@
       <ul class="nav-links" role="list">
         <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
         <li><a href="munkaim.html">Munkáim</a></li>
-        <li><a href="blog.html" aria-current="page">Blog</a></li>
+        <li><a href="blog.php" aria-current="page">Blog</a></li>
         <li><a href="rolam.html">Rólam</a></li>
         <li><a href="contact.html">Kapcsolat</a></li>
       </ul>
@@ -92,7 +101,7 @@
 <div id="mobile-nav" role="dialog" aria-label="Mobilmenü">
   <a href="szolgaltatasok.html" class="mobile-nav-link" onclick="closeNav()">Szolgáltatások</a>
   <a href="munkaim.html" class="mobile-nav-link" onclick="closeNav()">Munkáim</a>
-  <a href="blog.html" class="mobile-nav-link" onclick="closeNav()">Blog</a>
+  <a href="blog.php" class="mobile-nav-link" onclick="closeNav()">Blog</a>
   <a href="rolam.html" class="mobile-nav-link" onclick="closeNav()">Rólam</a>
   <a href="contact.html" class="mobile-nav-link" onclick="closeNav()">Kapcsolat</a>
   <a href="tel:+36302605756" class="btn-primary" style="margin-top:28px; justify-content:center;" onclick="closeNav()">
@@ -119,123 +128,63 @@
 <main class="blog-intro">
   <div class="container">
 
+  <?php if (!$featured): ?>
+    <div style="text-align:center;padding:60px 0;color:#64748b">
+      <h2 style="font-family:Poppins,sans-serif;color:#0F172A">Hamarosan érkeznek a cikkek</h2>
+      <p>Dolgozunk az első bejegyzéseken – nézzen vissza pár nap múlva!</p>
+    </div>
+  <?php else: ?>
+
     <div class="section-label">Legújabb cikk</div>
 
-    <!-- Featured / legfrissebb cikk -->
-    <a class="blog-featured" href="blog-kazan-karbantartas-mikor.html" aria-label="Mikor és milyen gyakran kell kazánt karbantartani? – cikk megnyitása">
+    <a class="blog-featured" href="post.php?slug=<?= e($featured['slug']) ?>" aria-label="<?= e($featured['title']) ?> – cikk megnyitása">
       <div class="blog-featured-media">
-        <img src="k%C3%A9pek/707445157_1589615896497672_6999197818411514873_n.webp" alt="Kazán karbantartás és tisztítás közben" loading="eager" decoding="async" />
+        <?php if (!empty($featured['featured_image'])): ?>
+          <img src="<?= e(img_src($featured['featured_image'])) ?>" alt="<?= e($featured['title']) ?>" loading="eager" decoding="async" />
+        <?php else: ?>
+          <img src="k%C3%A9pek/707445157_1589615896497672_6999197818411514873_n.webp" alt="<?= e($featured['title']) ?>" loading="eager" decoding="async" />
+        <?php endif; ?>
       </div>
       <div class="blog-featured-body">
-        <span class="blog-tag">Karbantartás</span>
-        <h2>Mikor és milyen gyakran kell kazánt karbantartani?</h2>
-        <p>Az éves karbantartás nemcsak a gyári garancia feltétele – kevesebb gázt fogyaszt, tovább él a kazán, és elkerüli a téli leállást. Megmutatom, mikor a legjobb időzítés és mire figyeljen.</p>
+        <h2><?= e($featured['title']) ?></h2>
+        <p><?= e($featured['excerpt']) ?></p>
         <div class="blog-meta">
-          <time datetime="2026-06-09">
+          <time datetime="<?= e(date('Y-m-d', strtotime($featured['published_at'] ?: $featured['created']))) ?>">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            2026. június 9.
+            <?= e(hu_date($featured['published_at'] ?: $featured['created'])) ?>
           </time>
           <span class="dot" aria-hidden="true"></span>
-          <span>6 perc olvasás</span>
+          <span><?= reading_time($featured['content']) ?> perc olvasás</span>
         </div>
       </div>
     </a>
 
-    <div class="section-label">Minden cikk</div>
+    <?php if ($rest): ?>
+      <div class="section-label">Minden cikk</div>
+      <div class="blog-grid">
+        <?php foreach ($rest as $p): ?>
+          <article class="blog-card">
+            <a class="blog-card-media" href="post.php?slug=<?= e($p['slug']) ?>" aria-label="Cikk megnyitása">
+              <?php if (!empty($p['featured_image'])): ?>
+                <img src="<?= e(img_src($p['featured_image'])) ?>" alt="<?= e($p['title']) ?>" loading="lazy" decoding="async" />
+              <?php else: ?>
+                <img src="k%C3%A9pek/708299957_1041331691655733_4562790263212162873_n.webp" alt="<?= e($p['title']) ?>" loading="lazy" decoding="async" />
+              <?php endif; ?>
+            </a>
+            <div class="blog-card-body">
+              <h3 class="blog-card-title"><a href="post.php?slug=<?= e($p['slug']) ?>"><?= e($p['title']) ?></a></h3>
+              <p class="blog-card-excerpt"><?= e($p['excerpt']) ?></p>
+              <div class="blog-meta">
+                <time datetime="<?= e(date('Y-m-d', strtotime($p['published_at'] ?: $p['created']))) ?>"><?= e(hu_date_short($p['published_at'] ?: $p['created'])) ?></time><span class="dot" aria-hidden="true"></span><span><?= reading_time($p['content']) ?> perc</span>
+              </div>
+              <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
 
-    <div class="blog-grid">
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/708299957_1041331691655733_4562790263212162873_n.webp" alt="Kazán hibakód a kijelzőn" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Hibakódok</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">5 leggyakoribb téli kazánhiba – és mit tegyen elsőként</a></h3>
-          <p class="blog-card-excerpt">A hideg beköszöntével megszaporodnak a hívások. Összeszedtem a leggyakoribb téli meghibásodásokat és az első lépéseket, mielőtt szakembert hív.</p>
-          <div class="blog-meta">
-            <time datetime="2026-05-28">2026. máj. 28.</time><span class="dot" aria-hidden="true"></span><span>5 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/708865694_1010758681499236_3829306001970551938_n.webp" alt="Gázkazán szerviz" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Spórolás</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">Így csökkentheti a gázszámláját a fűtési szezonban</a></h3>
-          <p class="blog-card-excerpt">Néhány beállítás és szokás, amivel érezhetően kevesebbet fizet – anélkül, hogy fagyoskodna otthon.</p>
-          <div class="blog-meta">
-            <time datetime="2026-05-15">2026. máj. 15.</time><span class="dot" aria-hidden="true"></span><span>4 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/708134573_1224220399645587_5410294520444085498_n.webp" alt="Új kondenzációs kazán a falon" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Kazáncsere</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">Javítás vagy csere? 5 jel, hogy ideje új kazánra</a></h3>
-          <p class="blog-card-excerpt">Ha sűrűsödnek a hibák és nő a gázszámla, lehet, hogy a javítgatás már drágább, mint egy korszerű készülék.</p>
-          <div class="blog-meta">
-            <time datetime="2026-04-30">2026. ápr. 30.</time><span class="dot" aria-hidden="true"></span><span>7 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/707667883_1000358642393394_1460888495025001767_n.webp" alt="Kazán beüzemelés családi házban" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Magyarázat</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">Mit jelent a kondenzációs technológia? Érthetően</a></h3>
-          <p class="blog-card-excerpt">Miért fogyaszt kevesebbet egy kondenzációs kazán, és kinek éri meg igazán a váltás? Szakzsargon nélkül.</p>
-          <div class="blog-meta">
-            <time datetime="2026-04-12">2026. ápr. 12.</time><span class="dot" aria-hidden="true"></span><span>5 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/707420684_1352835460072800_1841501831037842416_n.webp" alt="Kazán nyomásmérő" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Hibaelhárítás</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">Folyamatosan esik a kazán nyomása? Ezek az okok</a></h3>
-          <p class="blog-card-excerpt">Ha hetente után kell töltenie a rendszert, valami nincs rendben. Megnézzük a leggyakoribb okokat.</p>
-          <div class="blog-meta">
-            <time datetime="2026-03-25">2026. márc. 25.</time><span class="dot" aria-hidden="true"></span><span>4 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-      <article class="blog-card">
-        <a class="blog-card-media" href="blog-kazan-karbantartas-mikor.html" aria-label="Cikk megnyitása">
-          <img src="k%C3%A9pek/707420684_981249194665501_7865748018828990854_n.webp" alt="Gáz biztonsági felülvizsgálat" loading="lazy" decoding="async" />
-        </a>
-        <div class="blog-card-body">
-          <span class="blog-tag">Biztonság</span>
-          <h3 class="blog-card-title"><a href="blog-kazan-karbantartas-mikor.html">Gázbiztonsági felülvizsgálat: mikor kötelező és miért fontos</a></h3>
-          <p class="blog-card-excerpt">Nem csak előírás – életet menthet. Mikor esedékes, mit ellenőriz a szakember, és milyen tanúsítványt kap.</p>
-          <div class="blog-meta">
-            <time datetime="2026-03-08">2026. márc. 8.</time><span class="dot" aria-hidden="true"></span><span>6 perc</span>
-          </div>
-          <span class="blog-card-readmore">Tovább olvasom <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </div>
-      </article>
-
-    </div>
+  <?php endif; ?>
   </div>
 </main>
 
@@ -283,7 +232,7 @@
         <ul class="footer-links" role="list">
           <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
           <li><a href="munkaim.html">Munkáim</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="blog.php">Blog</a></li>
           <li><a href="rolam.html">Rólam</a></li>
           <li><a href="contact.html">Kapcsolat</a></li>
         </ul>

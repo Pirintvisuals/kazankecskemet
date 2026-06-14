@@ -10,3 +10,12 @@ lib/
 # Local experiments / notes
 hero-concepts/
 Claude.md
+
+# Admin: titkos konfiguráció (jelszó-hash) — SOHA ne kerüljön a repóba
+/inc/config.php
+# Futásidejű fájlok
+/content/.login_throttle.json
+# Feltöltött képek (felhasználói tartalom) — a mappát és védelmét megtartjuk
+/uploads/*
+!/uploads/.htaccess
+!/uploads/index.html
