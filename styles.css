@@ -194,6 +194,9 @@
     }
     .nav-links a:hover { color: #fff; }
     .nav-links a:hover::after { transform: scaleX(1); }
+    /* Aktuális oldal kiemelése a menüben */
+    .nav-links a[aria-current="page"] { color: #fff; }
+    .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
 
     .nav-actions { display: flex; align-items: center; gap: 14px; }
     .nav-phone {
