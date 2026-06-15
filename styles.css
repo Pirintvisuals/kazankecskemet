@@ -173,7 +173,7 @@
     .nav-logo-name span { color: #7DD3FC; }
     .nav-logo-sub { font-size: 0.7rem; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.04em; }
 
-    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 16px; }
     .nav-links li { animation: navLinkIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
     .nav-links li:nth-child(1) { animation-delay: 0.18s; }
     .nav-links li:nth-child(2) { animation-delay: 0.24s; }
@@ -211,6 +211,7 @@
       background: var(--accent); color: #fff; border: none;
       font-family: var(--font-head); font-size: 0.875rem; font-weight: 600;
       padding: 10px 20px; border-radius: var(--radius-sm);
+      white-space: nowrap;
       transition: background 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
       cursor: pointer;
       animation: navLinkIn 0.5s 0.46s cubic-bezier(0.22,1,0.36,1) both;
