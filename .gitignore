@@ -11,6 +11,9 @@ lib/
 hero-concepts/
 Claude.md
 
+# Eredeti, nagy méretű forrásképek – a webes (WebP) változatok a képek/ mappában vannak
+elküldött képek/
+
 # Admin: titkos konfiguráció (jelszó-hash) — SOHA ne kerüljön a repóba
 /inc/config.php
 # Futásidejű fájlok

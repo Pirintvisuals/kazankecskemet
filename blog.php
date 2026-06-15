@@ -76,6 +76,7 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
       </a>
       <ul class="nav-links" role="list">
         <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
+        <li><a href="markak.html">Márkák</a></li>
         <li><a href="munkaim.html">Munkáim</a></li>
         <li><a href="blog.php" aria-current="page">Blog</a></li>
         <li><a href="rolam.html">Rólam</a></li>
@@ -100,6 +101,7 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
 
 <div id="mobile-nav" role="dialog" aria-label="Mobilmenü">
   <a href="szolgaltatasok.html" class="mobile-nav-link" onclick="closeNav()">Szolgáltatások</a>
+  <a href="markak.html" class="mobile-nav-link" onclick="closeNav()">Márkák</a>
   <a href="munkaim.html" class="mobile-nav-link" onclick="closeNav()">Munkáim</a>
   <a href="blog.php" class="mobile-nav-link" onclick="closeNav()">Blog</a>
   <a href="rolam.html" class="mobile-nav-link" onclick="closeNav()">Rólam</a>
@@ -311,5 +313,6 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
   })();
 </script>
 
+<script src="brand-enhance.js" defer></script>
 </body>
 </html>

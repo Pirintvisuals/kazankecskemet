@@ -1764,3 +1764,108 @@
         transform: none !important;
       }
     }
+
+    /* ════════════════════════════════════════════════════════════════
+       MÁRKAOLDAL-FINOMÍTÁSOK – mozgás, márkaarculat, márkahub
+       (a brand-enhance.js aktiválja, márkánként eltérő --brand színnel)
+       ════════════════════════════════════════════════════════════════ */
+
+    /* — Görgetésre megjelenő mozgás — */
+    .reveal-up { opacity: 0; transform: translateY(24px); will-change: opacity, transform; }
+    .reveal-ready .reveal-up { transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); }
+    .reveal-up.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    /* — Lassú „Ken Burns” ráközelítés a hero-fotóra (élet a statikus képbe) — */
+    @keyframes svcHeroZoom { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+    .svc-hero-photo { animation: svcHeroZoom 22s ease-out forwards; }
+    @media (prefers-reduced-motion: reduce) { .svc-hero-photo { animation: none; } }
+
+    /* — Márka-akcentus a hős szekcióban (a --brand színt a brand-enhance.js állítja a :root-on) — */
+    .brand-hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; border-radius: 999px; padding: 8px 16px 8px 12px;
+      margin-bottom: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      transform: translateY(8px); opacity: 0; animation: badgeIn .6s .15s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes badgeIn { to { opacity: 1; transform: none; } }
+    .brand-hero-badge img { height: 22px; width: auto; display: block; }
+    .brand-hero-badge .bhb-word {
+      font-family: var(--font-head); font-weight: 800; font-size: .95rem; letter-spacing: -.01em;
+      color: var(--brand); line-height: 1;
+    }
+    .brand-hero-badge .bhb-label {
+      font-size: .72rem; font-weight: 600; color: #64748b; letter-spacing: .04em; text-transform: uppercase;
+      padding-left: 10px; margin-left: 2px; border-left: 1px solid #e2e8f0;
+    }
+    @media (prefers-reduced-motion: reduce) { .brand-hero-badge { animation: none; opacity: 1; transform: none; } }
+
+    /* a H1 kiemelt szava és az eyebrow a márka színét kapja */
+    .has-brand .svc-hero .svc-eyebrow { color: #fff; }
+    .has-brand .svc-hero h1 span {
+      position: relative; color: #fff;
+    }
+    .has-brand .svc-hero h1 span::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 4px; border-radius: 3px;
+      background: var(--brand); transform: scaleX(0); transform-origin: left; animation: ulIn .7s .35s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes ulIn { to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce){ .has-brand .svc-hero h1 span::after{ animation:none; transform:scaleX(1);} }
+
+    /* a tartalom finom márka-akcentusai */
+    .has-brand .svc-step-num { background: var(--brand); }
+    .has-brand .svc-callout { border-left-color: var(--brand); }
+    .has-brand .svc-prose .ci { color: var(--brand); }
+    .has-brand .svc-rel-card:hover { border-color: var(--brand); }
+    .has-brand .svc-rel-card:hover .svc-rel-link { color: var(--brand); }
+
+    /* — Finomabb interakciók a kapcsolódó kártyákon — */
+    .svc-rel-card { transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s, border-color .25s; }
+    .svc-rel-card:hover { transform: translateY(-4px); }
+    .svc-faq details { transition: border-color .2s; }
+    .svc-faq details[open] { border-color: var(--brand, var(--blue)); }
+
+    /* ════════════════════════════════════════════════════════════════
+       MÁRKAHUB OLDAL (markak.html)
+       ════════════════════════════════════════════════════════════════ */
+    .brands-hub { padding: 64px 0 72px; }
+    .brands-hub-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    }
+    @media (max-width: 920px) { .brands-hub-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .brands-hub-grid { grid-template-columns: 1fr; } }
+
+    .brand-tile {
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 26px 24px 22px; position: relative; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(15,23,42,.05);
+      transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
+    }
+    .brand-tile::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+      background: var(--bt, var(--blue)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease;
+    }
+    .brand-tile:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg, 0 18px 40px rgba(15,23,42,.12)); border-color: transparent; }
+    .brand-tile:hover::before { transform: scaleX(1); }
+
+    .brand-tile-logo {
+      height: 56px; display: flex; align-items: center; margin-bottom: 16px;
+    }
+    .brand-tile-logo img { max-height: 42px; max-width: 170px; width: auto; object-fit: contain; }
+    .brand-tile-word {
+      font-family: var(--font-head); font-weight: 800; font-size: 1.7rem; letter-spacing: -.02em; line-height: 1;
+      color: var(--bt, var(--navy));
+    }
+    .brand-tile h2 {
+      font-family: var(--font-head); font-size: 1.02rem; color: var(--navy); margin: 0 0 4px;
+    }
+    .brand-tile .bt-sub { font-size: .82rem; color: var(--text-muted); margin: 0 0 16px; }
+    .brand-tile-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .brand-tile-links a {
+      font-size: .82rem; font-weight: 600; font-family: var(--font-head);
+      color: var(--navy); background: var(--gray-light, #f1f5f9); border: 1px solid transparent;
+      padding: 7px 13px; border-radius: 8px; text-decoration: none; transition: .18s;
+    }
+    .brand-tile-links a:hover { background: #fff; border-color: var(--bt, var(--blue)); color: var(--bt, var(--blue)); }
