@@ -1862,7 +1862,11 @@
       font-family: var(--font-head); font-size: 1.02rem; color: var(--navy); margin: 0 0 4px;
     }
     .brand-tile .bt-sub { font-size: .82rem; color: var(--text-muted); margin: 0 0 16px; }
-    .brand-tile-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    /* whole brand tile is clickable (→ szerviz), while the sub-links stay clickable */
+    .brand-tile { cursor: pointer; }
+    .bt-cover { position: absolute; inset: 0; z-index: 1; border-radius: 16px; }
+    .brand-tile-logo, .brand-tile h2, .brand-tile .bt-sub { position: relative; z-index: 0; }
+    .brand-tile-links { display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 2; }
     .brand-tile-links a {
       font-size: .82rem; font-weight: 600; font-family: var(--font-head);
       color: var(--navy); background: var(--gray-light, #f1f5f9); border: 1px solid transparent;
