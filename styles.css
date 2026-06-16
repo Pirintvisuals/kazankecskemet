@@ -140,8 +140,15 @@
       box-shadow: 0 2px 24px rgba(0,0,0,0.35);
     }
     .nav-inner {
-      display: flex; align-items: center; justify-content: space-between; width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      width: 100%;
     }
+    .nav-inner .nav-logo { justify-self: start; }
+    .nav-inner .nav-links { justify-self: center; }
+    .nav-inner .nav-actions,
+    .nav-inner .nav-hamburger { justify-self: end; }
 
     /* Logo — always white on dark nav */
     @keyframes navLogoIn {
