@@ -140,15 +140,17 @@
       box-shadow: 0 2px 24px rgba(0,0,0,0.35);
     }
     .nav-inner {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       width: 100%;
+      position: relative;
     }
-    .nav-inner .nav-logo { justify-self: start; }
-    .nav-inner .nav-links { justify-self: center; }
-    .nav-inner .nav-actions,
-    .nav-inner .nav-hamburger { justify-self: end; }
+    .nav-inner .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
     /* Logo — always white on dark nav */
     @keyframes navLogoIn {
@@ -1443,6 +1445,11 @@
       background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
       color: #fff; position: relative; overflow: hidden;
       padding: calc(var(--nav-h) + 56px) 0 64px;
+      /* Fixed height so every subpage hero renders identically regardless of
+         how much text/CTA/meta each page has; content is centered vertically. */
+      min-height: 680px;
+      display: flex;
+      align-items: center;
     }
     .svc-hero::after {
       content: ''; position: absolute; top: -45%; right: -8%;
@@ -1469,6 +1476,7 @@
     }
     @media (max-width: 880px) {
       .svc-hero-photo, .svc-hero::before { display: none; }
+      .svc-hero { min-height: 520px; }
     }
     .svc-breadcrumb { font-size: 0.85rem; margin-bottom: 22px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .svc-breadcrumb a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
