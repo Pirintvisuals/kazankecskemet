@@ -40,5 +40,7 @@
 - [Kapcsolat](https://kazanszervizkecskemet.hu/contact.html)
 
 ## Blog
-- [5 leggyakoribb téli kazánhiba – és mit tegyen elsőként](https://kazanszervizkecskemet.hu/post-5-leggyakoribb-teli-kazanhiba.html)
-- [Mikor és milyen gyakran kell kazánt karbantartani?](https://kazanszervizkecskemet.hu/post-kazan-karbantartas-mikor.html)
+- [Blog – összes cikk](https://kazanszervizkecskemet.hu/blog.php)
+- [5 leggyakoribb téli kazánhiba – és mit tegyen elsőként](https://kazanszervizkecskemet.hu/post.php?slug=5-leggyakoribb-teli-kazanhiba)
+- [Mikor és milyen gyakran kell kazánt karbantartani?](https://kazanszervizkecskemet.hu/post.php?slug=kazan-karbantartas-mikor)
+- [Kazán hibakódok márkánként – mit jelentenek és mi a teendő?](https://kazanszervizkecskemet.hu/post.php?slug=kazan-hibakodok)
