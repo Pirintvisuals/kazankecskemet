@@ -139,16 +139,27 @@
     #nav.scrolled {
       box-shadow: 0 2px 24px rgba(0,0,0,0.35);
     }
+    /* Flex + space-between: a logó a bal, a gombok a jobb szélre kerülnek,
+       a linkek középre, MINDKÉT oldalon egyforma térközzel. A korábbi
+       1fr auto 1fr rács a 6 link miatt a jobb oldalon összezsúfolódott
+       (a linkek szinte a gombokhoz értek), bal oldalon meg nagy üres rés
+       maradt. Mobilon (csak logó + hamburger) ugyanígy a két szélre ül. */
     .nav-inner {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 32px;
       width: 100%;
     }
-    .nav-inner .nav-logo   { justify-self: start; }
-    .nav-inner .nav-links  { justify-self: center; }
-    .nav-inner .nav-actions,
-    .nav-inner .nav-hamburger { justify-self: end; }
+    .nav-inner .nav-links { flex: 0 1 auto; }
+
+    /* Let the navbar span the full width so the three zones hug the edges
+       instead of clustering inside the 1200px content container. */
+    #nav > .container {
+      max-width: none;
+      padding-left: clamp(20px, 3.5vw, 48px);
+      padding-right: clamp(20px, 3.5vw, 48px);
+    }
 
     /* Logo — always white on dark nav */
     @keyframes navLogoIn {
@@ -180,12 +191,16 @@
     .nav-logo-name span { color: #7DD3FC; }
     .nav-logo-sub { font-size: 0.7rem; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.04em; }
 
-    .nav-links { display: flex; align-items: center; gap: 16px; }
+    /* Wider spacing on desktop; tightens on narrow viewports so the six-link
+       row keeps fitting before the hamburger breakpoint kicks in. */
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 1.8vw, 22px); }
     .nav-links li { animation: navLinkIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
     .nav-links li:nth-child(1) { animation-delay: 0.18s; }
     .nav-links li:nth-child(2) { animation-delay: 0.24s; }
     .nav-links li:nth-child(3) { animation-delay: 0.30s; }
     .nav-links li:nth-child(4) { animation-delay: 0.36s; }
+    .nav-links li:nth-child(5) { animation-delay: 0.42s; }
+    .nav-links li:nth-child(6) { animation-delay: 0.48s; }
     .nav-links a {
       position: relative;
       font-size: 0.875rem; font-weight: 500;
@@ -229,25 +244,47 @@
     .nav-cta:hover { background: var(--accent-dark); transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-accent); }
     .nav-cta svg { flex-shrink: 0; }
 
-    /* Mobile slide-down menu panel (opened via JS → display:flex) */
-    @keyframes mobileNavIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    /* Mobile slide-down menu panel (opened via JS → display:flex).
+       A compact dropdown that hugs its content rather than covering the whole
+       screen; it scrolls internally only if the content is taller than the
+       viewport. */
+    @keyframes mobileNavIn {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes mobileLinkIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     #mobile-nav {
       display: none;
-      position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0; z-index: 190;
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 190;
       flex-direction: column;
       background: var(--navy);
-      padding: 26px 26px calc(28px + env(safe-area-inset-bottom));
+      padding: 14px 22px calc(22px + env(safe-area-inset-bottom));
+      max-height: calc(100dvh - var(--nav-h));
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      animation: mobileNavIn 0.3s cubic-bezier(0.22,1,0.36,1);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 26px 44px rgba(0,0,0,0.45);
+      transform-origin: top center;
+      animation: mobileNavIn 0.34s cubic-bezier(0.22,1,0.36,1);
     }
     .mobile-nav-link {
-      font-family: var(--font-head); font-size: 1.18rem; font-weight: 600;
+      font-family: var(--font-head); font-size: 1.12rem; font-weight: 600;
       color: rgba(255,255,255,0.85);
-      padding: 17px 6px;
+      padding: 15px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       transition: color 0.2s, padding-left 0.2s;
+      animation: mobileLinkIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
     }
+    #mobile-nav .mobile-nav-link:nth-child(1) { animation-delay: 0.06s; }
+    #mobile-nav .mobile-nav-link:nth-child(2) { animation-delay: 0.10s; }
+    #mobile-nav .mobile-nav-link:nth-child(3) { animation-delay: 0.14s; }
+    #mobile-nav .mobile-nav-link:nth-child(4) { animation-delay: 0.18s; }
+    #mobile-nav .mobile-nav-link:nth-child(5) { animation-delay: 0.22s; }
+    #mobile-nav .mobile-nav-link:nth-child(6) { animation-delay: 0.26s; }
     .mobile-nav-link:hover, .mobile-nav-link:active { color: #7DD3FC; padding-left: 12px; }
 
     .nav-hamburger {
@@ -1274,10 +1311,14 @@
     .contact-info-value { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--navy); margin-top: 2px; transition: color 0.2s; }
     a:hover .contact-info-value { color: var(--blue); }
 
+    /* min-width:0 stops the long, unbreakable e-mail address from forcing the
+       card's min-content width and overflowing the viewport on phones. */
+    .contact-inner > * { min-width: 0; }
     .contact-card {
       background: var(--white); border: 1px solid var(--border);
       border-radius: var(--radius-lg); padding: 44px;
       box-shadow: var(--shadow-md);
+      min-width: 0;
     }
     .contact-card-title { font-family: var(--font-head); font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
     .contact-card-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px; }
@@ -1305,7 +1346,8 @@
     .email-block:hover { border-color: rgba(26,86,232,0.3); box-shadow: 0 0 0 3px rgba(26,86,232,0.06); }
     .email-block-icon { color: var(--blue); flex-shrink: 0; }
     .email-text { font-size: 0.88rem; color: var(--text-muted); }
-    .email-addr { font-family: var(--font-head); font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+    .email-addr { font-family: var(--font-head); font-size: 0.92rem; font-weight: 600; color: var(--navy); overflow-wrap: anywhere; }
+    .email-block > div { min-width: 0; }
 
     .hours-block { border-top: 1px solid var(--border); padding-top: 20px; }
     .hours-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 14px; }
@@ -1394,12 +1436,12 @@
       .nav-phone { display: none; }
     }
     @media (max-width: 980px) {
+      /* Below this width the links collapse into the hamburger menu, so the
+         phone + CTA cluster is hidden too (it lives in the open menu instead).
+         This keeps the bar as a clean logo-left / hamburger-right layout. */
       .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-    }
-    /* On phones the floating call button takes over for the nav CTA */
-    @media (max-width: 768px) {
       .nav-actions { display: none; }
+      .nav-hamburger { display: flex; }
     }
 
     /* Services grid: 3 → 2 → 1 columns */
@@ -1499,6 +1541,11 @@
     .svc-prose h3 { font-family: var(--font-head); font-size: 1.18rem; font-weight: 700; color: var(--navy); margin: 28px 0 10px; }
     .svc-prose p { color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; font-size: 1rem; }
     .svc-prose strong { color: var(--navy); font-weight: 600; }
+    .svc-prose ul, .svc-prose ol { margin: 0 0 18px; padding-left: 1.3em; }
+    .svc-prose ul { list-style: disc; }
+    .svc-prose ol { list-style: decimal; }
+    .svc-prose li { color: var(--text-mid); line-height: 1.7; margin-bottom: 8px; }
+    .svc-prose li::marker { color: var(--blue); }
 
     .svc-checklist { display: grid; gap: 14px; margin: 8px 0; }
     .svc-checklist li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-mid); line-height: 1.6; }
@@ -1742,6 +1789,25 @@
       margin: 24px 0; color: var(--text-mid); font-style: italic;
     }
 
+    /* ── Lite YouTube-embed (kattintásra tölti be az iframe-et) ───── */
+    .yt-lite { position: relative; margin: 10px 0 30px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); background: #000; }
+    .yt-lite-btn { display: block; width: 100%; margin: 0; padding: 0; border: 0; background: #000; cursor: pointer; position: relative; aspect-ratio: 16 / 9; }
+    .yt-lite-btn img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.92; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.3s; }
+    .yt-lite-btn:hover img, .yt-lite-btn:focus-visible img { transform: scale(1.04); opacity: 1; }
+    .yt-lite-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+    .yt-lite-play svg { filter: drop-shadow(0 3px 10px rgba(0,0,0,0.45)); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .yt-lite-play .yt-lite-bg { fill: rgba(20,20,20,0.78); transition: fill 0.2s; }
+    .yt-lite-btn:hover .yt-lite-play svg, .yt-lite-btn:focus-visible .yt-lite-play svg { transform: scale(1.12); }
+    .yt-lite-btn:hover .yt-lite-play .yt-lite-bg, .yt-lite-btn:focus-visible .yt-lite-play .yt-lite-bg { fill: #f00; }
+    .yt-lite.is-playing { aspect-ratio: 16 / 9; }
+    .yt-lite iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+    .yt-lite-cap { font-size: 0.82rem; color: var(--text-muted); text-align: center; padding: 10px 14px; background: var(--off-white); }
+
+    /* In-content fotó a márkaoldalakon (hero-n kívül) */
+    .svc-content-photo { margin: 30px 0; }
+    .svc-content-photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-md); box-shadow: var(--shadow-md); display: block; }
+    .svc-content-photo figcaption { font-size: 0.84rem; color: var(--text-muted); text-align: center; margin-top: 10px; }
+
     @media (max-width: 900px) {
       .blog-featured { grid-template-columns: 1fr; }
       .blog-featured-media { min-height: 220px; position: relative; }
@@ -1771,6 +1837,8 @@
       .nav-links li,
       .nav-actions,
       .nav-hamburger,
+      #mobile-nav,
+      .mobile-nav-link,
       .hero-h1,
       .hero-avail,
       .hero-sub-text,
