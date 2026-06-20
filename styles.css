@@ -134,10 +134,11 @@
       height: var(--nav-h);
       display: flex; align-items: center;
       background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       transition: transform 0.38s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
     }
     #nav.scrolled {
-      box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+      box-shadow: 0 4px 22px rgba(0,0,0,0.28);
     }
     /* Flex + space-between: a logó a bal, a gombok a jobb szélre kerülnek,
        a linkek középre, MINDKÉT oldalon egyforma térközzel. A korábbi
@@ -175,12 +176,12 @@
       animation: navLogoIn 0.55s 0.1s cubic-bezier(0.22,1,0.36,1) both;
     }
     .nav-logo-img-wrap {
-      height: 44px; display: flex; align-items: center;
+      height: 46px; display: flex; align-items: center;
       transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
     }
     .nav-logo:hover .nav-logo-img-wrap { transform: scale(1.08); }
     .nav-logo-img-wrap img {
-      height: 52px; width: auto;
+      height: 46px; width: auto;
       display: block;
     }
     .nav-logo-text-wrap { display: flex; flex-direction: column; line-height: 1.2; }
@@ -189,7 +190,6 @@
       color: #fff; letter-spacing: -0.01em;
     }
     .nav-logo-name span { color: #7DD3FC; }
-    .nav-logo-sub { font-size: 0.7rem; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.04em; }
 
     /* Wider spacing on desktop; tightens on narrow viewports so the six-link
        row keeps fitting before the hamburger breakpoint kicks in. */
@@ -204,7 +204,7 @@
     .nav-links a {
       position: relative;
       font-size: 0.875rem; font-weight: 500;
-      color: rgba(255,255,255,0.62);
+      color: rgba(255,255,255,0.72);
       padding: 8px 14px; border-radius: var(--radius-sm);
       transition: color 0.22s;
     }
@@ -220,7 +220,11 @@
     .nav-links a[aria-current="page"] { color: #fff; }
     .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
 
-    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .nav-actions {
+      display: flex; align-items: center; gap: 14px;
+      padding-left: clamp(14px, 1.6vw, 24px);
+      border-left: 1px solid rgba(255,255,255,0.10);
+    }
     .nav-phone {
       display: inline-flex; align-items: center; gap: 7px;
       font-family: var(--font-head); font-size: 0.9rem; font-weight: 600;
