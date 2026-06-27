@@ -314,5 +314,6 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
 </script>
 
 <script src="brand-enhance.js" defer></script>
+<script src="cookie-banner.js" defer></script>
 </body>
 </html>

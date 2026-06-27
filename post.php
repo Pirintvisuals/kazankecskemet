@@ -260,5 +260,6 @@ $pubDate   = $visible ? ($post['published_at'] ?: $post['created']) : '';
   })();
 </script>
 <script src="brand-enhance.js" defer></script>
+<script src="cookie-banner.js" defer></script>
 </body>
 </html>
