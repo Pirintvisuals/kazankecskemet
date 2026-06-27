@@ -61,7 +61,7 @@
     banner.setAttribute('aria-live', 'polite');
     banner.setAttribute('aria-label', 'Sütik kezelése');
     banner.innerHTML =
-      '<p class="cookie-banner__title">Sütiket használunk 🍪</p>' +
+      '<p class="cookie-banner__title">Sütiket használunk</p>' +
       '<p class="cookie-banner__text">Oldalunk sütiket használ a működés biztosításához és a felhasználói élmény javításához. ' +
       'Részletek az <a href="' + PRIVACY_URL + '">Adatkezelési tájékoztatóban</a>.</p>' +
       '<div class="cookie-banner__actions">' +
