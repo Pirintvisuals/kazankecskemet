@@ -18,8 +18,8 @@ if (!$visible) {
 
 $pageTitle = $visible ? ($post['title'] . ' | Kazán Szerviz Kecskemét') : 'A cikk nem található | Kazán Szerviz Kecskemét';
 $metaDesc  = $visible ? ($post['excerpt'] !== '' ? $post['excerpt'] : excerpt_from_html($post['content'])) : 'A keresett cikk nem található.';
-$canonical = 'https://kazanszervizkecskemet.hu/post.php?slug=' . rawurlencode($slug);
-$ogImage   = ($visible && !empty($post['featured_image'])) ? 'https://kazanszervizkecskemet.hu/' . ltrim($post['featured_image'], '/') : '';
+$canonical = 'https://gazszerelokecskemet.hu/post.php?slug=' . rawurlencode($slug);
+$ogImage   = ($visible && !empty($post['featured_image'])) ? 'https://gazszerelokecskemet.hu/' . ltrim($post['featured_image'], '/') : '';
 $pubDate   = $visible ? ($post['published_at'] ?: $post['created']) : '';
 ?><!DOCTYPE html>
 <html lang="hu">
@@ -63,14 +63,14 @@ $pubDate   = $visible ? ($post['published_at'] ?: $post['created']) : '';
       '@context' => 'https://schema.org',
       '@type' => 'BreadcrumbList',
       'itemListElement' => array(
-          array('@type'=>'ListItem','position'=>1,'name'=>'Főoldal','item'=>'https://kazanszervizkecskemet.hu/'),
-          array('@type'=>'ListItem','position'=>2,'name'=>'Blog','item'=>'https://kazanszervizkecskemet.hu/blog.php'),
+          array('@type'=>'ListItem','position'=>1,'name'=>'Főoldal','item'=>'https://gazszerelokecskemet.hu/'),
+          array('@type'=>'ListItem','position'=>2,'name'=>'Blog','item'=>'https://gazszerelokecskemet.hu/blog.php'),
           array('@type'=>'ListItem','position'=>3,'name'=>$post['title'],'item'=>$canonical),
       ),
   ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
   </script>
   <?php endif; ?>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 

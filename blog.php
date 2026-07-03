@@ -15,10 +15,10 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
   <title>Blog – Kazán tippek és tanácsok | Kazán Szerviz Kecskemét</title>
   <meta name="description" content="Hasznos cikkek a kazánjáról: karbantartás, hibakódok, gázszámla-csökkentés és kazáncsere. Polyák Zoltán kazánszerelő és gázbiztonsági felülvizsgáló tanácsai Kecskemétről." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://kazanszervizkecskemet.hu/blog.php" />
+  <link rel="canonical" href="https://gazszerelokecskemet.hu/blog.php" />
   <meta property="og:title" content="Blog – Kazán tippek és tanácsok | Kazán Szerviz Kecskemét" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kazanszervizkecskemet.hu/blog.php" />
+  <meta property="og:url" content="https://gazszerelokecskemet.hu/blog.php" />
   <meta name="theme-color" content="#0F172A" />
   <link rel="icon" type="image/png" href="logo%20transparent.png" />
   <link rel="apple-touch-icon" href="logo%20transparent.png" />
@@ -32,7 +32,7 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
   "@type": "Blog",
   "name": "Kazán Szerviz Kecskemét – Blog",
   "description": "Hasznos cikkek a kazánról: karbantartás, hibakódok, gázszámla-csökkentés és kazáncsere.",
-  "url": "https://kazanszervizkecskemet.hu/blog.php",
+  "url": "https://gazszerelokecskemet.hu/blog.php",
   "publisher": {
     "@type": "LocalBusiness",
     "name": "Kazán Szerviz Kecskemét – Polyák Zoltán",
@@ -52,13 +52,13 @@ function img_src($path) { return $path !== '' ? '/' . ltrim($path, '/') : ''; }
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Főoldal", "item": "https://kazanszervizkecskemet.hu/" },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kazanszervizkecskemet.hu/blog.php" }
+    { "@type": "ListItem", "position": 1, "name": "Főoldal", "item": "https://gazszerelokecskemet.hu/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://gazszerelokecskemet.hu/blog.php" }
   ]
 }
   </script>
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 

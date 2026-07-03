@@ -12,35 +12,35 @@
 - Nyitvatartás: hétfő–péntek 08:00–17:00
 
 ## Szolgáltatások
-- [Kazán javítás](https://kazanszervizkecskemet.hu/kazan-javitas.html): Gyors hibaelhárítás, ha a kazán nem fűt, nem gyújt be vagy hibakódot ír ki.
-- [Kazán szerviz](https://kazanszervizkecskemet.hu/kazan-szerviz.html): Éves átvizsgálás, tisztítás és beszabályozás.
-- [Kazán karbantartás](https://kazanszervizkecskemet.hu/kazan-karbantartas.html): Megelőző karbantartás kisebb gázszámláért és kevesebb hibáért.
-- [Kazáncsere](https://kazanszervizkecskemet.hu/kazancsere.html): Korszerű, energiatakarékos kazánra csere.
-- [Kazán beüzemelés](https://kazanszervizkecskemet.hu/kazan-beuzemeles.html): Új készülék szakszerű, garanciális üzembe helyezése.
-- [Gáz biztonsági felülvizsgálat](https://kazanszervizkecskemet.hu/gaz-biztonsagi-felulvizsgalat.html): Hatósági tanúsítvány kiállítása.
-- [Fűtési rendszer átmosása](https://kazanszervizkecskemet.hu/futesi-rendszer-atmosasa.html): Vegyszeres iszaptalanítás.
-- [Kéménybélelés](https://kazanszervizkecskemet.hu/kemenybeleles.html): Biztonságos égéstermék-elvezetés.
-- [Kazán hibakódok](https://kazanszervizkecskemet.hu/kazan-hibakodok.html): Hibakódok jelentése és teendők.
+- [Kazán javítás](https://gazszerelokecskemet.hu/kazan-javitas.html): Gyors hibaelhárítás, ha a kazán nem fűt, nem gyújt be vagy hibakódot ír ki.
+- [Kazán szerviz](https://gazszerelokecskemet.hu/kazan-szerviz.html): Éves átvizsgálás, tisztítás és beszabályozás.
+- [Kazán karbantartás](https://gazszerelokecskemet.hu/kazan-karbantartas.html): Megelőző karbantartás kisebb gázszámláért és kevesebb hibáért.
+- [Kazáncsere](https://gazszerelokecskemet.hu/kazancsere.html): Korszerű, energiatakarékos kazánra csere.
+- [Kazán beüzemelés](https://gazszerelokecskemet.hu/kazan-beuzemeles.html): Új készülék szakszerű, garanciális üzembe helyezése.
+- [Gáz biztonsági felülvizsgálat](https://gazszerelokecskemet.hu/gaz-biztonsagi-felulvizsgalat.html): Hatósági tanúsítvány kiállítása.
+- [Fűtési rendszer átmosása](https://gazszerelokecskemet.hu/futesi-rendszer-atmosasa.html): Vegyszeres iszaptalanítás.
+- [Kéménybélelés](https://gazszerelokecskemet.hu/kemenybeleles.html): Biztonságos égéstermék-elvezetés.
+- [Kazán hibakódok](https://gazszerelokecskemet.hu/kazan-hibakodok.html): Hibakódok jelentése és teendők.
 
 ## Szervizelt márkák
-- [Ariston](https://kazanszervizkecskemet.hu/ariston-kazan-szerviz.html)
-- [Baxi](https://kazanszervizkecskemet.hu/baxi-kazan-szerviz.html)
-- [Biasi](https://kazanszervizkecskemet.hu/biasi-kazan-szerviz.html)
-- [Bosch](https://kazanszervizkecskemet.hu/bosch-kazan-szerviz.html)
-- [Hajdu](https://kazanszervizkecskemet.hu/hajdu-kazan-szerviz.html)
-- [Immergas](https://kazanszervizkecskemet.hu/immergas-kazan-szerviz.html)
-- [Viessmann](https://kazanszervizkecskemet.hu/viessmann-kazan-szerviz.html)
-- [Westen](https://kazanszervizkecskemet.hu/westen-kazan-szerviz.html)
-- [Wolf](https://kazanszervizkecskemet.hu/wolf-kazan-szerviz.html)
+- [Ariston](https://gazszerelokecskemet.hu/ariston-kazan-szerviz.html)
+- [Baxi](https://gazszerelokecskemet.hu/baxi-kazan-szerviz.html)
+- [Biasi](https://gazszerelokecskemet.hu/biasi-kazan-szerviz.html)
+- [Bosch](https://gazszerelokecskemet.hu/bosch-kazan-szerviz.html)
+- [Hajdu](https://gazszerelokecskemet.hu/hajdu-kazan-szerviz.html)
+- [Immergas](https://gazszerelokecskemet.hu/immergas-kazan-szerviz.html)
+- [Viessmann](https://gazszerelokecskemet.hu/viessmann-kazan-szerviz.html)
+- [Westen](https://gazszerelokecskemet.hu/westen-kazan-szerviz.html)
+- [Wolf](https://gazszerelokecskemet.hu/wolf-kazan-szerviz.html)
 
 ## További oldalak
-- [Rólam – Polyák Zoltán](https://kazanszervizkecskemet.hu/rolam.html)
-- [Munkáim – referenciák](https://kazanszervizkecskemet.hu/munkaim.html)
-- [Szolgáltatások áttekintés](https://kazanszervizkecskemet.hu/szolgaltatasok.html)
-- [Kapcsolat](https://kazanszervizkecskemet.hu/contact.html)
+- [Rólam – Polyák Zoltán](https://gazszerelokecskemet.hu/rolam.html)
+- [Munkáim – referenciák](https://gazszerelokecskemet.hu/munkaim.html)
+- [Szolgáltatások áttekintés](https://gazszerelokecskemet.hu/szolgaltatasok.html)
+- [Kapcsolat](https://gazszerelokecskemet.hu/contact.html)
 
 ## Blog
-- [Blog – összes cikk](https://kazanszervizkecskemet.hu/blog.php)
-- [5 leggyakoribb téli kazánhiba – és mit tegyen elsőként](https://kazanszervizkecskemet.hu/post.php?slug=5-leggyakoribb-teli-kazanhiba)
-- [Mikor és milyen gyakran kell kazánt karbantartani?](https://kazanszervizkecskemet.hu/post.php?slug=kazan-karbantartas-mikor)
-- [Kazán hibakódok márkánként – mit jelentenek és mi a teendő?](https://kazanszervizkecskemet.hu/post.php?slug=kazan-hibakodok)
+- [Blog – összes cikk](https://gazszerelokecskemet.hu/blog.php)
+- [5 leggyakoribb téli kazánhiba – és mit tegyen elsőként](https://gazszerelokecskemet.hu/post.php?slug=5-leggyakoribb-teli-kazanhiba)
+- [Mikor és milyen gyakran kell kazánt karbantartani?](https://gazszerelokecskemet.hu/post.php?slug=kazan-karbantartas-mikor)
+- [Kazán hibakódok márkánként – mit jelentenek és mi a teendő?](https://gazszerelokecskemet.hu/post.php?slug=kazan-hibakodok)
