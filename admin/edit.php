@@ -185,7 +185,7 @@ admin_head($isNew ? 'Új cikk' : 'Cikk szerkesztése', $isNew ? 'new' : '');
   </div>
 </form>
 
-<script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="tinymce/tinymce.min.js"></script>
 <script>
   const CSRF = <?= json_encode(csrf_token()) ?>;
   tinymce.init({
@@ -196,7 +196,7 @@ admin_head($isNew ? 'Új cikk' : 'Cikk szerkesztése', $isNew ? 'new' : '');
     branding: false,
     promotion: false,
     language: 'hu_HU',
-    language_url: 'https://cdn.jsdelivr.net/npm/tinymce-i18n@24/langs7/hu_HU.js',
+    language_url: 'tinymce/langs/hu_HU.js',
     plugins: 'lists link image autolink autoresize code',
     toolbar: 'undo redo | blocks | bold italic | bullist numlist | link image blockquote | removeformat code',
     block_formats: 'Bekezdés=p; Címsor 2=h2; Címsor 3=h3; Idézet=blockquote',
