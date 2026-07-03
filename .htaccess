@@ -1,0 +1,8 @@
+# ─────────────────────────────────────────────────────────────
+#  Kazán Szerviz Kecskemét – gyökér .htaccess
+#  Biztonság: rejtett fájlok / mappák HTTP-elérésének tiltása.
+#  Így a .git, .claude, .gitignore stb. akkor sem olvasható a
+#  böngészőből, ha véletlenül feltöltésre kerül (pl. Ctrl+A).
+#  A /.well-known/ (SSL, domain-igazolás) kivétel marad.
+# ─────────────────────────────────────────────────────────────
+RedirectMatch 404 /\.(?!well-known/)
