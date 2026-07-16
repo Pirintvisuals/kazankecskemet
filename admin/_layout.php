@@ -22,6 +22,7 @@ function admin_head($title, $active = '') {
   <div class="adm-top-inner">
     <a class="adm-brand" href="index.php">Kazán<span>Admin</span></a>
     <nav class="adm-nav" aria-label="Admin menü">
+      <a href="bookings.php"<?= $active === 'bookings' ? ' class="active"' : '' ?>>Foglalások</a>
       <a href="index.php"<?= $active === 'list' ? ' class="active"' : '' ?>>Cikkek</a>
       <a href="edit.php"<?= $active === 'new' ? ' class="active"' : '' ?>>Új cikk</a>
       <a href="../blog.php" target="_blank" rel="noopener">Blog megtekintése ↗</a>

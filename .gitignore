@@ -18,6 +18,10 @@ elküldött képek/
 /inc/config.php
 # Futásidejű fájlok
 /content/.login_throttle.json
+# Foglalások: futásidejű, személyes adatot (név, telefon, cím) tartalmazó fájlok — SOHA ne kerüljenek a repóba
+/content/bookings/
+/content/.booking_throttle.json
+/content/.booking.lock
 # Feltöltött képek (felhasználói tartalom) — a mappát és védelmét megtartjuk
 /uploads/*
 !/uploads/.htaccess

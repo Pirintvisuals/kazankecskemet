@@ -1962,3 +1962,106 @@
       padding: 7px 13px; border-radius: 8px; text-decoration: none; transition: .18s;
     }
     .brand-tile-links a:hover { background: #fff; border-color: var(--bt, var(--blue)); color: var(--bt, var(--blue)); }
+
+    /* ═══ ONLINE IDŐPONTFOGLALÓ (booking widget) ═══════════════ */
+    .bk-section { padding: 72px 0; background: var(--off-white); }
+    .bk-head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+    .bk-eyebrow {
+      display: inline-block; font-family: var(--font-head); font-weight: 700; font-size: .8rem;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .bk-head h2 { font-family: var(--font-head); font-size: clamp(1.6rem, 3.5vw, 2.3rem); color: var(--navy); margin: 0 0 12px; line-height: 1.2; }
+    .bk-head p { color: var(--text-mid); font-size: 1.05rem; }
+    .bk-card {
+      max-width: 760px; margin: 0 auto; background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 32px;
+    }
+    @media (max-width: 560px){ .bk-card { padding: 22px 16px; } }
+
+    .bkf-widget { min-height: 200px; }
+    .bkf-loading, .bkf-noslot { color: var(--text-muted); padding: 14px 0; }
+    .bkf-noslot a { color: var(--blue); font-weight: 700; }
+
+    /* Lépések */
+    .bkf-steps { display: flex; gap: 8px; margin-bottom: 26px; }
+    .bkf-step {
+      flex: 1; display: flex; align-items: center; gap: 8px; font-family: var(--font-head);
+      font-weight: 600; font-size: .9rem; color: var(--text-muted);
+      padding: 10px 12px; border-radius: var(--radius-sm); background: var(--gray-light);
+      border: 1px solid transparent; transition: .2s;
+    }
+    .bkf-step span {
+      display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px;
+      border-radius: 50%; background: #fff; border: 1px solid var(--border); font-size: .82rem; flex: none;
+    }
+    .bkf-step.is-active { color: var(--navy); background: var(--blue-light); border-color: rgba(3,105,161,.3); }
+    .bkf-step.is-active span { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .bkf-step.is-done span { background: var(--accent); color: #fff; border-color: var(--accent); }
+    @media (max-width: 560px){ .bkf-step { font-size: 0; padding: 8px; justify-content: center; } .bkf-step span { font-size: .82rem; } }
+
+    /* Naptár */
+    .bkf-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .bkf-cal-label { font-family: var(--font-head); font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+    .bkf-cal-prev, .bkf-cal-next {
+      width: 38px; height: 38px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+      background: #fff; color: var(--navy); font-size: 1.3rem; line-height: 1; cursor: pointer; transition: .15s;
+    }
+    .bkf-cal-prev:hover:not(:disabled), .bkf-cal-next:hover:not(:disabled){ border-color: var(--blue); color: var(--blue); }
+    .bkf-cal-prev:disabled, .bkf-cal-next:disabled { opacity: .35; cursor: default; }
+    .bkf-cal-head { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; margin-bottom: 6px; }
+    .bkf-cal-head span { text-align: center; font-size: .74rem; font-weight: 700; color: var(--text-muted); }
+    .bkf-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; }
+    .bkf-cell {
+      aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff;
+      font-family: var(--font-head); font-weight: 600; font-size: .98rem; color: var(--navy); cursor: pointer; transition: .13s;
+    }
+    .bkf-cell:hover:not(.is-disabled):not(.is-selected){ border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .bkf-cell.is-selected { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: var(--shadow-blue); }
+    .bkf-cell.is-disabled { color: var(--border); background: var(--off-white); cursor: default; }
+    .bkf-cell-empty { border: none; background: transparent; cursor: default; }
+
+    /* Idősávok */
+    .bkf-slotwrap { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 22px; }
+    .bkf-slotwrap h4 { font-family: var(--font-head); color: var(--navy); font-size: 1.02rem; margin: 0 0 14px; }
+    .bkf-slots { display: flex; flex-wrap: wrap; gap: 10px; }
+    .bkf-slot {
+      padding: 12px 22px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: #fff;
+      font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--navy); cursor: pointer; transition: .13s;
+    }
+    .bkf-slot:hover:not(.is-taken):not(.is-selected){ border-color: var(--accent); color: var(--accent); }
+    .bkf-slot.is-selected { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: var(--shadow-accent); }
+    .bkf-slot.is-taken { color: var(--border); text-decoration: line-through; cursor: default; background: var(--off-white); }
+
+    /* Űrlap */
+    .bkf-formwrap { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 22px; }
+    .bkf-chosenbar {
+      background: var(--blue-light); border: 1px solid rgba(3,105,161,.2); border-radius: var(--radius-sm);
+      padding: 12px 16px; margin-bottom: 20px; color: var(--navy); font-size: .95rem;
+    }
+    .bkf-chosenbar strong { font-family: var(--font-head); }
+    .bkf-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bkf-field { display: flex; flex-direction: column; }
+    .bkf-field-full, .bkf-formmsg, .bkf-submit, .bkf-note { grid-column: 1 / -1; }
+    .bkf-field label { font-weight: 600; font-size: .85rem; color: var(--navy); margin-bottom: 6px; }
+    .bkf-field input, .bkf-field textarea {
+      padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: .98rem; color: var(--text); background: #fff; transition: .15s;
+    }
+    .bkf-field input:focus, .bkf-field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-glow); }
+    .bkf-field textarea { resize: vertical; }
+    .bkf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .bkf-submit { width: 100%; justify-content: center; margin-top: 4px; }
+    .bkf-note { font-size: .82rem; color: var(--text-muted); text-align: center; margin: 0; }
+    .bkf-formmsg { font-size: .92rem; font-weight: 600; }
+    .bkf-formmsg.is-err { color: var(--accent-dark); background: #fef2f2; border: 1px solid #fecaca; padding: 11px 14px; border-radius: var(--radius-sm); }
+    @media (max-width: 560px){ .bkf-form { grid-template-columns: 1fr; } }
+
+    /* Sikeres foglalás */
+    .bkf-success { text-align: center; padding: 20px 10px; }
+    .bkf-success-ico {
+      width: 68px; height: 68px; margin: 0 auto 18px; border-radius: 50%;
+      background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center;
+    }
+    .bkf-success h3 { font-family: var(--font-head); color: var(--navy); font-size: 1.5rem; margin: 0 0 12px; }
+    .bkf-success-when { background: var(--off-white); border-radius: var(--radius-md); padding: 14px; margin: 0 auto 16px; max-width: 380px; color: var(--text-mid); }
+    .bkf-success-when strong { color: var(--navy); font-family: var(--font-head); font-size: 1.1rem; }
