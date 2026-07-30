@@ -189,7 +189,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             Üzenet küldése
           </button>
-          <p class="cform-note">Az „Üzenet küldése" gombbal a levelezőprogramja nyílik meg az előre kitöltött üzenettel. Sürgős esetben kérem, inkább <a href="tel:+36302605756" style="color:var(--blue);font-weight:600;">hívjon</a>.</p>
+          <p class="cform-note">Sürgős esetben kérem, inkább <a href="tel:+36302605756" style="color:var(--blue);font-weight:600;">hívjon</a>.</p>
         </form>
       </section>
 
@@ -362,21 +362,28 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
   /* Contact form → compose a prefilled e-mail (no backend needed) */
-  document.getElementById('contact-form')?.addEventListener('submit', e => {
+  document.getElementById('contact-form')?.addEventListener('submit', async e => {
     e.preventDefault();
     const f = e.target;
     if (!f.checkValidity()) { f.reportValidity(); return; }
-    const v = id => (f.elements[id]?.value || '').trim();
-    const name = v('name'), phone = v('phone'), email = v('email'), service = v('service'), message = v('message');
-    const subject = 'Ajánlatkérés – ' + (service || 'Kazán szerviz') + ' (' + name + ')';
-    const body =
-      'Név: ' + name + '\n' +
-      'Telefon: ' + phone + '\n' +
-      'E-mail: ' + email + '\n' +
-      'Szolgáltatás: ' + (service || '–') + '\n\n' +
-      'Üzenet:\n' + message + '\n';
-    window.location.href = 'mailto:info@kazanszervizkecskemet.hu?subject=' +
-      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    const btn = f.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Küldés…';
+    try {
+      const res = await fetch('send.php', { method: 'POST', body: new FormData(f) });
+      const data = await res.json();
+      if (data.ok) {
+        f.innerHTML = '<p style="color:#16a34a;font-size:1.1rem;font-weight:600;padding:32px 0">✓ Üzenet elküldve! Hamarosan felveszem Önnel a kapcsolatot.</p>';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Üzenet küldése';
+        alert('Hiba történt. Kérjük, hívjon minket: +36 30 260 57 56');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Üzenet küldése';
+      alert('Hiba történt. Kérjük, hívjon minket: +36 30 260 57 56');
+    }
   });
 </script>
 
