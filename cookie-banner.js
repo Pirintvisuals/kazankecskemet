@@ -8,6 +8,18 @@
   var STORAGE_KEY = 'kazan_cookie_consent';
   var PRIVACY_URL = 'adatkezelesi-tajekoztato.html';
 
+  // Website analytics: loaded from here because this file is on every page.
+  // Tracks without storing anything until the visitor clicks "Elfogadom".
+  (function () {
+    if (document.querySelector('script[src*="site-analytics.js"]')) return;
+    var sa = document.createElement('script');
+    sa.src = '/site-analytics.js';
+    sa.defer = true;
+    sa.setAttribute('data-site', 'kazan-kecskemet');
+    sa.setAttribute('data-consent-key', STORAGE_KEY);
+    document.head.appendChild(sa);
+  })();
+
   // Ha már döntött a felhasználó, ne jelenjen meg újra.
   try {
     if (localStorage.getItem(STORAGE_KEY)) return;
@@ -73,6 +85,7 @@
 
     banner.querySelector('.cookie-banner__btn--accept').addEventListener('click', function () {
       store('accepted');
+      if (window.siteAnalyticsConsent) window.siteAnalyticsConsent(true);
       dismiss(banner);
     });
     banner.querySelector('.cookie-banner__btn--decline').addEventListener('click', function () {
