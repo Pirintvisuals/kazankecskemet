@@ -245,9 +245,9 @@ $pubDate   = $visible ? ($post['published_at'] ?: $post['created']) : '';
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 </script>
 <script>
-  window.KAZAN_CONFIG = { apiUrl: "https://kecskemet-kazan-widget.vercel.app/api/faq-agent", assetsUrl: "https://kecskemet-kazan-widget.vercel.app" };
+  window.KAZAN_CONFIG = { apiUrl: "https://kecskemet-kazan-quotingwidget.vercel.app/api/faq-agent", assetsUrl: "https://kecskemet-kazan-quotingwidget.vercel.app" };
 </script>
-<script src="https://kecskemet-kazan-widget.vercel.app/widget.js" defer></script>
+<script src="https://kecskemet-kazan-quotingwidget.vercel.app/widget.js" defer></script>
 <script>
   (function () {
     if (window.matchMedia('(max-width: 600px)').matches) return;
