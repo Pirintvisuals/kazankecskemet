@@ -244,21 +244,6 @@ $pubDate   = $visible ? ($post['published_at'] ?: $post['created']) : '';
   window.addEventListener('resize', () => { if (window.innerWidth > 980) closeNav(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 </script>
-<script>
-  window.KAZAN_CONFIG = { apiUrl: "https://kecskemet-kazan-widget.vercel.app/api/faq-agent", assetsUrl: "https://kecskemet-kazan-widget.vercel.app" };
-</script>
-<script src="https://kecskemet-kazan-widget.vercel.app/widget.js" defer></script>
-<script>
-  (function () {
-    if (window.matchMedia('(max-width: 600px)').matches) return;
-    if (sessionStorage.getItem('kazanChatAutoOpened')) return;
-    var tries = 0, iv = setInterval(function () {
-      var l = document.querySelector('.faq-chat-launcher');
-      if (l) { clearInterval(iv); sessionStorage.setItem('kazanChatAutoOpened', '1'); l.click(); }
-      else if (++tries > 60) { clearInterval(iv); }
-    }, 100);
-  })();
-</script>
 <script src="brand-enhance.js" defer></script>
 <script src="cookie-banner.js" defer></script>
 </body>
